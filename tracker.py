@@ -305,7 +305,7 @@ if not load_data():
                 "etd": "After all pre-reqs are completed"
             },
             {
-                "title": "Warrant Request Form", 
+                "title": "Submit Warrant Request Form", 
                 "term": "Summer 2025", 
                 "where": "--",
                 "status": "To Do",
