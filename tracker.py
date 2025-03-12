@@ -384,7 +384,7 @@ cols[5].markdown("**Start Date**")
 cols[6].markdown("**End Date**")
 
 # Complete before BSE Admission
-st.markdown('<div class="subheader">Complete (with min 3.0 GPA) prior to BSE Admission</div>', unsafe_allow_html=True)
+st.markdown('<div class="subheader">Complete (with min 3.0 GPA) prior to BSE Admission:</div>', unsafe_allow_html=True)
 
 # Display and manage pre-BSE courses
 for i, course in enumerate(st.session_state.pre_bse_courses[:2]):
@@ -417,7 +417,7 @@ for i, course in enumerate(st.session_state.pre_bse_courses[:2]):
     cols[6].markdown(course["etd"])
 
 # Additional Courses to Complete
-st.markdown('<div class="subheader">Additional Courses to Complete</div>', unsafe_allow_html=True)
+st.markdown('<div class="subheader">Additional Courses to Complete:</div>', unsafe_allow_html=True)
 
 # Display and manage additional pre-BSE courses
 for i, course in enumerate(st.session_state.pre_bse_courses[2:], 2):
@@ -464,7 +464,7 @@ cols[5].markdown("**Start Date**")
 cols[6].markdown("**End Date**")
 
 # Research/Seminars
-st.markdown('<div class="subheader">Research/Seminars</div>', unsafe_allow_html=True)
+st.markdown('<div class="subheader">Research/Seminars:</div>', unsafe_allow_html=True)
 
 # Display and manage BSE grad courses
 for i, course in enumerate(st.session_state.bse_grad_courses):
