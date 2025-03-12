@@ -63,7 +63,8 @@ if 'pre_bse_courses' not in st.session_state:
             "where": "ExtensionLearning (UW)",
             "status": "In Progress",
             "ets": "--",
-            "etd": "4/28/25"
+            "etd": "4/28/25",
+             "online": True
         },
         {
             "name": "PHYSICS 103, 104, 201, or 202", 
@@ -77,7 +78,7 @@ if 'pre_bse_courses' not in st.session_state:
         {
             "name": "MATH222", 
             "credits": 4, 
-            "term": "Winter/Spring 2025", 
+            "term": "Spring 2025", 
             "where": "ExtensionLearning (UW)",
             "status": "In Progress",
             "ets": "--",
@@ -87,7 +88,7 @@ if 'pre_bse_courses' not in st.session_state:
         {
             "name": "MATH240", 
             "credits": 3, 
-            "term": "Spring/Summer 2025", 
+            "term": "Summer 2025", 
             "where": "UW-Madison (Summer Semester)",
             "status": "To Do",
             "ets": "6/16/2025",
@@ -134,7 +135,7 @@ if 'science_eng_courses' not in st.session_state:
         {
             "name": "BSE 367 (Renewable Energy Systems)", 
             "credits": 3, 
-            "term": "Spring/Summer 2025", 
+            "term": "Summer 2025", 
             "where": "UW-Madison (Summer Semester)",
             "status": "To Do",
             "ets": "6/16/2025",
@@ -144,7 +145,7 @@ if 'science_eng_courses' not in st.session_state:
         {
             "name": "M E / CS 532 (MATRIX METHODS IN MACHINE LEARNING)", 
             "credits": 3, 
-            "term": "Spring/Summer 2025", 
+            "term": "Summer 2025", 
             "where": "UW-Madison (Summer Semester)",
             "status": "To Do",
             "ets": "6/16/2025",
@@ -157,7 +158,6 @@ if 'presentations' not in st.session_state:
     st.session_state.presentations = [
         {
             "title": "BSE 901 Presentation", 
-            "location": "In Person", 
             "term": "Spring 2025", 
             "where": "UW-Madison",
             "status": "Preparing",
@@ -166,7 +166,6 @@ if 'presentations' not in st.session_state:
         },
         {
             "title": "Thesis Defense", 
-            "location": "In Person", 
             "term": "Summer 2025", 
             "where": "UW-Madison",
             "status": "To Do",
@@ -179,7 +178,6 @@ if 'committee_meetings' not in st.session_state:
     st.session_state.committee_meetings = [
         {
             "title": "1st Committee Meeting", 
-            "location": "In Person", 
             "term": "Fall 2025", 
             "where": " UW-Madison",
             "status": "Complete",
@@ -188,7 +186,6 @@ if 'committee_meetings' not in st.session_state:
         },
         {
             "title": "2nd Committee Meeting", 
-            "location": "In Person", 
             "term": "Spring 2025", 
             "where": " UW-Madison",
             "status": "To Do",
@@ -197,7 +194,6 @@ if 'committee_meetings' not in st.session_state:
         },
         {
             "title": "Circulate thesis outline (papers 1, 2)", 
-            "location": "Email", 
             "term": "Spring 2025", 
             "where": " -- ",
             "status": "To Do",
@@ -209,8 +205,7 @@ if 'committee_meetings' not in st.session_state:
 if 'paperwork' not in st.session_state:
     st.session_state.paperwork = [
         {
-            "title": "Submit Committee Paperwork", 
-            "location": "--", 
+            "title": "Submit Committee Form with Signatures", 
             "term": "Spring 2025", 
             "where": "--",
             "status": "To Do",
@@ -219,7 +214,6 @@ if 'paperwork' not in st.session_state:
         },
         {
             "title": "Warrant Request Form", 
-            "location": "", 
             "term": "Summer 2025", 
             "where": " -- ",
             "status": "To Do",
@@ -228,8 +222,7 @@ if 'paperwork' not in st.session_state:
         },
         {
             "title": "Submit pre-reqs to BSE once complete", 
-            "location": "--", 
-            "term": "Summer 2025", 
+            "term": "--", 
             "where": "-- ",
             "status": "To Do",
             "ets": "--",
@@ -237,7 +230,6 @@ if 'paperwork' not in st.session_state:
         },
         {
             "title": "Sign up for summer courses", 
-            "location": "--", 
             "term": "Spring 2025", 
             "where": "UW-Madison",
             "status": "To Do",
