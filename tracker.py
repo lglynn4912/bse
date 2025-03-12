@@ -237,7 +237,7 @@ if 'committee_meetings' not in st.session_state:
             "where": "",
             "status": "To Do",
             "ets": "--",
-            "etd": "Once submitted"
+            "etd": "Once submitted for pre-print"
         }
     ]
 
@@ -262,7 +262,7 @@ if 'paperwork' not in st.session_state:
         {
             "title": "Submit pre-reqs to BSE once complete", 
             "term": "Summer 2025", 
-            "where": "BSE Department",
+            "where": "--",
             "status": "To Do",
             "ets": "--",
             "etd": "After all pre-reqs are completed"
@@ -270,7 +270,7 @@ if 'paperwork' not in st.session_state:
         {
             "title": "Sign up for summer courses", 
             "term": "Spring 2025", 
-            "where": "UW-Madison",
+            "where": "--",
             "status": "To Do",
             "ets": "--",
             "etd": "Once assigned summer enrollment date"
