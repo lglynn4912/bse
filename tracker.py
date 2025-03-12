@@ -135,7 +135,7 @@ if not load_data():
             {
                 "name": "MATH221", 
                 "credits": 5, 
-                "term": "Winter/Spring 2024", 
+                "term": "Winter 2024/Spring 2025", 
                 "where": "ExtensionLearning (UW)",
                 "status": "In Progress",
                 "ets": "--",
