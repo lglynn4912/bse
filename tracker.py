@@ -1,5 +1,7 @@
 import streamlit as st
 import datetime
+import json
+import os
 
 # Page config
 st.set_page_config(
@@ -93,189 +95,241 @@ st.markdown("""
 
 st.title("BSE M.S. Progress Tracker for Lauren Glynn")
 
+# File path for saving data
+DATA_FILE = "bse_course_tracker_data.json"
+
+# Function to save all data to a file
+def save_data():
+    data = {
+        "pre_bse_courses": st.session_state.pre_bse_courses,
+        "bse_grad_courses": st.session_state.bse_grad_courses,
+        "science_eng_courses": st.session_state.science_eng_courses,
+        "presentations": st.session_state.presentations,
+        "committee_meetings": st.session_state.committee_meetings,
+        "paperwork": st.session_state.paperwork
+    }
+    with open(DATA_FILE, "w") as f:
+        json.dump(data, f, indent=2)
+
+# Function to load data from file
+def load_data():
+    if os.path.exists(DATA_FILE):
+        try:
+            with open(DATA_FILE, "r") as f:
+                data = json.load(f)
+            
+            # Update session state with loaded data
+            for key, value in data.items():
+                st.session_state[key] = value
+            
+            return True
+        except Exception as e:
+            st.error(f"Error loading data: {e}")
+    return False
+
 # Initialize session state for courses if not exists
-if 'pre_bse_courses' not in st.session_state:
-    st.session_state.pre_bse_courses = [
-        {
-            "name": "MATH221", 
-            "credits": 5, 
-            "term": "Winter/Spring 2024", 
-            "where": "ExtensionLearning (UW)",
-            "status": "In Progress",
-            "ets": "--",
-            "etd": "4/28/25"
-        },
-        {
-            "name": "PHYSICS 103, 104, 201, or 202", 
-            "credits": 4, 
-            "term": "Fall 2024", 
-            "where": "MATC",
-            "status": "Complete",
-            "ets": "8/25/2024",
-            "etd": "12/15/2024"
-        },
-        {
-            "name": "MATH222", 
-            "credits": 4, 
-            "term": "Winter/Spring 2025", 
-            "where": "ExtensionLearning (UW)",
-            "status": "In Progress",
-            "ets": "--",
-            "etd": "6/27/2025",
-            "online": True
-        },
-        {
-            "name": "MATH240", 
-            "credits": 3, 
-            "term": "Summer 2025", 
-            "where": "UW-Madison (Summer Semester)",
-            "status": "To Do",
-            "ets": "6/16/2025",
-            "etd": "8/10/2025",
-            "online": True
-        }
-    ]
+# First try to load from file, if file doesn't exist, use default data
+if not load_data():
+    if 'pre_bse_courses' not in st.session_state:
+        st.session_state.pre_bse_courses = [
+            {
+                "name": "MATH221", 
+                "credits": 5, 
+                "term": "Winter/Spring 2024", 
+                "where": "ExtensionLearning (UW)",
+                "status": "In Progress",
+                "ets": "--",
+                "etd": "4/28/25"
+            },
+            {
+                "name": "PHYSICS 103, 104, 201, or 202", 
+                "credits": 4, 
+                "term": "Fall 2024", 
+                "where": "MATC",
+                "status": "Complete",
+                "ets": "8/25/2024",
+                "etd": "12/15/2024"
+            },
+            {
+                "name": "MATH222", 
+                "credits": 4, 
+                "term": "Winter/Spring 2025", 
+                "where": "ExtensionLearning (UW)",
+                "status": "In Progress",
+                "ets": "--",
+                "etd": "6/27/2025",
+                "online": True
+            },
+            {
+                "name": "MATH240", 
+                "credits": 3, 
+                "term": "Summer 2025", 
+                "where": "UW-Madison (Summer Semester)",
+                "status": "To Do",
+                "ets": "6/16/2025",
+                "etd": "8/10/2025",
+                "online": True
+            }
+        ]
 
-if 'bse_grad_courses' not in st.session_state:
-    st.session_state.bse_grad_courses = [
-        {
-            "name": "BSE 900", 
-            "credits": 1, 
-            "term": "Waived", 
-            "where": "",
-            "status": "Complete",
-            "ets": "",
-            "etd": ""
-        },
-        {
-            "name": "BSE 901", 
-            "credits": 1, 
-            "term": "Spring 2025", 
-            "where": "UW-Madison (Spring Semester)",
-            "status": "In Progress",
-            "ets": "1/22/2025",
-            "etd": "4/30/2025",
-            "online": True
-        },
-        {
-            "name": "BSE 990", 
-            "credits": 10, 
-            "term": "Spring 2025", 
-            "where": "UW-Madison (Spring Semester)",
-            "status": "In Progress",
-            "ets": "1/22/2025",
-            "etd": "4/30/2025",
-            "online": True
-        }
-    ]
+    if 'bse_grad_courses' not in st.session_state:
+        st.session_state.bse_grad_courses = [
+            {
+                "name": "BSE 900", 
+                "credits": 1, 
+                "term": "Waived", 
+                "where": "",
+                "status": "Complete",
+                "ets": "",
+                "etd": ""
+            },
+            {
+                "name": "BSE 901", 
+                "credits": 1, 
+                "term": "Spring 2025", 
+                "where": "UW-Madison (Spring Semester)",
+                "status": "In Progress",
+                "ets": "1/22/2025",
+                "etd": "4/30/2025",
+                "online": True
+            },
+            {
+                "name": "BSE 990", 
+                "credits": 10, 
+                "term": "Spring 2025", 
+                "where": "UW-Madison (Spring Semester)",
+                "status": "In Progress",
+                "ets": "1/22/2025",
+                "etd": "4/30/2025",
+                "online": True
+            }
+        ]
 
-if 'science_eng_courses' not in st.session_state:
-    st.session_state.science_eng_courses = [
-        {
-            "name": "BSE 367 (Renewable Energy Systems)", 
-            "credits": 3, 
-            "term": "Summer 2025", 
-            "where": "UW-Madison (Summer Semester)",
-            "status": "To Do",
-            "ets": "6/16/2025",
-            "etd": "8/10/2025",
-            "online": True
-        },
-        {
-            "name": "M E / CS 532 (MATRIX METHODS IN MACHINE LEARNING)", 
-            "credits": 3, 
-            "term": "Summer 2025", 
-            "where": "UW-Madison (Summer Semester)",
-            "status": "To Do",
-            "ets": "6/16/2025",
-            "etd": "8/10/2025",
-            "online": True
-        }
-    ]
+    if 'science_eng_courses' not in st.session_state:
+        st.session_state.science_eng_courses = [
+            {
+                "name": "BSE 367 (Renewable Energy Systems)", 
+                "credits": 3, 
+                "term": "Summer 2025", 
+                "where": "UW-Madison (Summer Semester)",
+                "status": "To Do",
+                "ets": "6/16/2025",
+                "etd": "8/10/2025",
+                "online": True
+            },
+            {
+                "name": "M E / CS 532 (MATRIX METHODS IN MACHINE LEARNING)", 
+                "credits": 3, 
+                "term": "Summer 2025", 
+                "where": "UW-Madison (Summer Semester)",
+                "status": "To Do",
+                "ets": "6/16/2025",
+                "etd": "8/10/2025",
+                "online": True
+            }
+        ]
 
-if 'presentations' not in st.session_state:
-    st.session_state.presentations = [
-        {
-            "title": "BSE 901 Presentation", 
-            "term": "Spring 2025", 
-            "where": "UW-Madison",
-            "status": "Preparing",
-            "ets": "--",
-            "etd": "4/9/2025"
-        },
-        {
-            "title": "Thesis Defense", 
-            "term": "Summer 2025", 
-            "where": "UW-Madison",
-            "status": "To Do",
-            "ets": "--",
-            "etd": "August 2025"
-        }
-    ]
+    if 'presentations' not in st.session_state:
+        st.session_state.presentations = [
+            {
+                "title": "BSE 901 Presentation", 
+                "term": "Spring 2025", 
+                "where": "UW-Madison",
+                "status": "Preparing",
+                "ets": "--",
+                "etd": "4/9/2025"
+            },
+            {
+                "title": "Thesis Defense", 
+                "term": "Summer 2025", 
+                "where": "UW-Madison",
+                "status": "To Do",
+                "ets": "--",
+                "etd": "August 2025"
+            }
+        ]
 
-if 'committee_meetings' not in st.session_state:
-    st.session_state.committee_meetings = [
-        {
-            "title": "1st Committee Meeting", 
-            "term": "Fall 2024", 
-            "where": "UW-Madison",
-            "status": "Complete",
-            "ets": "--",
-            "etd": "12/9/24"
-        },
-        {
-            "title": "2nd Committee Meeting",  
-            "term": "Spring 2025", 
-            "where": "UW-Madison",
-            "status": "To Do",
-            "ets": "--",
-            "etd": "April 2025"
-        },
-        {
-            "title": "Circulate thesis outline (papers 1, 2)", 
-            "term": "Spring 2025", 
-            "where": "--",
-            "status": "To Do",
-            "ets": "--",
-            "etd": "Once submitted for pre-print"
-        }
-    ]
+    if 'committee_meetings' not in st.session_state:
+        st.session_state.committee_meetings = [
+            {
+                "title": "1st Committee Meeting", 
+                "term": "Fall 2024", 
+                "where": "UW-Madison",
+                "status": "Complete",
+                "ets": "--",
+                "etd": "12/9/24"
+            },
+            {
+                "title": "2nd Committee Meeting",  
+                "term": "Spring 2025", 
+                "where": "UW-Madison",
+                "status": "To Do",
+                "ets": "--",
+                "etd": "April 2025"
+            },
+            {
+                "title": "Circulate thesis outline (papers 1, 2)", 
+                "term": "Spring 2025", 
+                "where": "--",
+                "status": "To Do",
+                "ets": "--",
+                "etd": "Once submitted for pre-print"
+            }
+        ]
 
-if 'paperwork' not in st.session_state:
-    st.session_state.paperwork = [
-        {
-            "title": "Submit signed Committee Form", 
-            "term": "Spring 2025", 
-            "where": "--",
-            "status": "To Do",
-            "ets": "--",
-            "etd": "April 2025"
-        },
-        {
-            "title": "Sign up for summer courses", 
-            "term": "Spring 2025", 
-            "where": "--",
-            "status": "To Do",
-            "ets": "--",
-            "etd": "Once assigned summer enrollment date"
-        },
-        {
-            "title": "Submit pre-reqs to BSE once complete", 
-            "term": "Summer 2025", 
-            "where": "--",
-            "status": "To Do",
-            "ets": "--",
-            "etd": "After all pre-reqs are completed"
-        },
-        {
-            "title": "Warrant Request Form", 
-            "term": "Summer 2025", 
-            "where": "--",
-            "status": "To Do",
-            "ets": "--",
-            "etd": "Three weeks prior to defense"
-        }
-    ]
+    if 'paperwork' not in st.session_state:
+        st.session_state.paperwork = [
+            {
+                "title": "Submit signed Committee Form", 
+                "term": "Spring 2025", 
+                "where": "--",
+                "status": "To Do",
+                "ets": "--",
+                "etd": "April 2025"
+            },
+            {
+                "title": "Sign up for summer courses", 
+                "term": "Spring 2025", 
+                "where": "--",
+                "status": "To Do",
+                "ets": "--",
+                "etd": "Once assigned summer enrollment date"
+            },
+            {
+                "title": "Submit pre-reqs to BSE once complete", 
+                "term": "Summer 2025", 
+                "where": "--",
+                "status": "To Do",
+                "ets": "--",
+                "etd": "After all pre-reqs are completed"
+            },
+            {
+                "title": "Warrant Request Form", 
+                "term": "Summer 2025", 
+                "where": "--",
+                "status": "To Do",
+                "ets": "--",
+                "etd": "Three weeks prior to defense"
+            }
+        ]
+
+# Function to update an item status and save the data
+def update_status(section, index, new_status):
+    if section == "pre_bse":
+        st.session_state.pre_bse_courses[index]["status"] = new_status
+    elif section == "bse_grad":
+        st.session_state.bse_grad_courses[index]["status"] = new_status
+    elif section == "science_eng":
+        st.session_state.science_eng_courses[index]["status"] = new_status
+    elif section == "pres":
+        st.session_state.presentations[index]["status"] = new_status
+    elif section == "meeting":
+        st.session_state.committee_meetings[index]["status"] = new_status
+    elif section == "paper":
+        st.session_state.paperwork[index]["status"] = new_status
+    
+    # Save changes to file
+    save_data()
 
 # Function to display status with colored background
 def display_status(status):
@@ -345,10 +399,13 @@ for i, course in enumerate(st.session_state.pre_bse_courses[:2]):
         status_options,
         index=status_options.index(course["status"]) if course["status"] in status_options else 0,
         key=f"pre_bse_{i}_status",
-        label_visibility="collapsed"
+        label_visibility="collapsed",
+        on_change=update_status,
+        args=("pre_bse", i, status_options[status_options.index(course["status"]) if course["status"] in status_options else 0])
     )
+    
     if new_status != course["status"]:
-        st.session_state.pre_bse_courses[i]["status"] = new_status
+        update_status("pre_bse", i, new_status)
     
     cols[5].markdown(course["ets"])
     cols[6].markdown(course["etd"])
@@ -376,10 +433,13 @@ for i, course in enumerate(st.session_state.pre_bse_courses[2:], 2):
         status_options,
         index=status_options.index(course["status"]) if course["status"] in status_options else 0,
         key=f"pre_bse_{i}_status",
-        label_visibility="collapsed"
+        label_visibility="collapsed",
+        on_change=update_status,
+        args=("pre_bse", i, status_options[status_options.index(course["status"]) if course["status"] in status_options else 0])
     )
+    
     if new_status != course["status"]:
-        st.session_state.pre_bse_courses[i]["status"] = new_status
+        update_status("pre_bse", i, new_status)
     
     cols[5].markdown(course["ets"])
     cols[6].markdown(course["etd"])
@@ -420,10 +480,13 @@ for i, course in enumerate(st.session_state.bse_grad_courses):
         status_options,
         index=status_options.index(course["status"]) if course["status"] in status_options else 0,
         key=f"bse_grad_{i}_status",
-        label_visibility="collapsed"
+        label_visibility="collapsed",
+        on_change=update_status,
+        args=("bse_grad", i, status_options[status_options.index(course["status"]) if course["status"] in status_options else 0])
     )
+    
     if new_status != course["status"]:
-        st.session_state.bse_grad_courses[i]["status"] = new_status
+        update_status("bse_grad", i, new_status)
     
     cols[5].markdown(course["ets"])
     cols[6].markdown(course["etd"])
@@ -451,10 +514,13 @@ for i, course in enumerate(st.session_state.science_eng_courses):
         status_options,
         index=status_options.index(course["status"]) if course["status"] in status_options else 0,
         key=f"science_eng_{i}_status",
-        label_visibility="collapsed"
+        label_visibility="collapsed",
+        on_change=update_status,
+        args=("science_eng", i, status_options[status_options.index(course["status"]) if course["status"] in status_options else 0])
     )
+    
     if new_status != course["status"]:
-        st.session_state.science_eng_courses[i]["status"] = new_status
+        update_status("science_eng", i, new_status)
     
     cols[5].markdown(course["ets"])
     cols[6].markdown(course["etd"])
@@ -483,10 +549,13 @@ for i, pres in enumerate(st.session_state.presentations):
         status_options,
         index=status_options.index(pres["status"]) if pres["status"] in status_options else 0,
         key=f"pres_{i}_status",
-        label_visibility="collapsed"
+        label_visibility="collapsed",
+        on_change=update_status,
+        args=("pres", i, status_options[status_options.index(pres["status"]) if pres["status"] in status_options else 0])
     )
+    
     if new_status != pres["status"]:
-        st.session_state.presentations[i]["status"] = new_status
+        update_status("pres", i, new_status)
     
     # Show only end date/due date
     cols[4].markdown(pres["etd"])
@@ -515,10 +584,13 @@ for i, meeting in enumerate(st.session_state.committee_meetings):
         status_options,
         index=status_options.index(meeting["status"]) if meeting["status"] in status_options else 0,
         key=f"meeting_{i}_status",
-        label_visibility="collapsed"
+        label_visibility="collapsed",
+        on_change=update_status,
+        args=("meeting", i, status_options[status_options.index(meeting["status"]) if meeting["status"] in status_options else 0])
     )
+    
     if new_status != meeting["status"]:
-        st.session_state.committee_meetings[i]["status"] = new_status
+        update_status("meeting", i, new_status)
     
     # Show only end date/due date
     cols[4].markdown(meeting["etd"])
@@ -545,10 +617,13 @@ for i, paper in enumerate(st.session_state.paperwork):
         status_options,
         index=status_options.index(paper["status"]) if paper["status"] in status_options else 0,
         key=f"paper_{i}_status",
-        label_visibility="collapsed"
+        label_visibility="collapsed",
+        on_change=update_status,
+        args=("paper", i, status_options[status_options.index(paper["status"]) if paper["status"] in status_options else 0])
     )
+    
     if new_status != paper["status"]:
-        st.session_state.paperwork[i]["status"] = new_status
+        update_status("paper", i, new_status)
     
     # Show only due date
     cols[3].markdown(paper["etd"])
@@ -658,6 +733,8 @@ with st.form("new_item_form"):
                 "etd": etd
             })
         
+        # Save changes to file after adding a new item
+        save_data()
         st.rerun()
 
 # Export options
@@ -679,19 +756,6 @@ if st.button(f"Export as {export_format}"):
         for course in st.session_state.pre_bse_courses:
             writer.writerow([
                 "Pre-BSE Course", 
-                course.get("name", ""), 
-                course.get("credits", ""), 
-                course.get("term", ""),
-                course.get("where", ""),
-                course.get("status", ""),
-                course.get("ets", ""),
-                course.get("etd", "")
-            ])
-        
-        # Write BSE grad courses
-        for course in st.session_state.bse_grad_courses:
-            writer.writerow([
-                "BSE Grad Course", 
                 course.get("name", ""), 
                 course.get("credits", ""), 
                 course.get("term", ""),
@@ -779,4 +843,30 @@ if st.button(f"Export as {export_format}"):
             data=json.dumps(export_data, indent=2),
             file_name="bse_course_tracker.json",
             mime="application/json"
-        )
+        ).get("status", ""),
+                course.get("ets", ""),
+                course.get("etd", "")
+            ])
+        
+        # Write BSE grad courses
+        for course in st.session_state.bse_grad_courses:
+            writer.writerow([
+                "BSE Grad Course", 
+                course.get("name", ""), 
+                course.get("credits", ""), 
+                course.get("term", ""),
+                course.get("where", ""),
+                course.get("status", ""),
+                course.get("ets", ""),
+                course.get("etd", "")
+            ])
+        
+        # Write Science/Eng courses
+        for course in st.session_state.science_eng_courses:
+            writer.writerow([
+                "Science/Eng Course", 
+                course.get("name", ""), 
+                course.get("credits", ""), 
+                course.get("term", ""),
+                course.get("where", ""),
+                course
