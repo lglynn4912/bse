@@ -765,6 +765,19 @@ if st.button(f"Export as {export_format}"):
                 course.get("etd", "")
             ])
         
+        # Write BSE grad courses
+        for course in st.session_state.bse_grad_courses:
+            writer.writerow([
+                "BSE Grad Course", 
+                course.get("name", ""), 
+                course.get("credits", ""), 
+                course.get("term", ""),
+                course.get("where", ""),
+                course.get("status", ""),
+                course.get("ets", ""),
+                course.get("etd", "")
+            ])
+        
         # Write Science/Eng courses
         for course in st.session_state.science_eng_courses:
             writer.writerow([
@@ -843,30 +856,4 @@ if st.button(f"Export as {export_format}"):
             data=json.dumps(export_data, indent=2),
             file_name="bse_course_tracker.json",
             mime="application/json"
-        ).get("status", ""),
-            course.get("ets", ""),
-            course.get("etd", "")
-            ])
-        
-        # Write BSE grad courses
-        for course in st.session_state.bse_grad_courses:
-            writer.writerow([
-                "BSE Grad Course", 
-                course.get("name", ""), 
-                course.get("credits", ""), 
-                course.get("term", ""),
-                course.get("where", ""),
-                course.get("status", ""),
-                course.get("ets", ""),
-                course.get("etd", "")
-            ])
-        
-        # Write Science/Eng courses
-        for course in st.session_state.science_eng_courses:
-            writer.writerow([
-                "Science/Eng Course", 
-                course.get("name", ""), 
-                course.get("credits", ""), 
-                course.get("term", ""),
-                course.get("where", ""),
-                course
+        )
