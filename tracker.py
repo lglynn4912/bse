@@ -130,7 +130,7 @@ if 'pre_bse_courses' not in st.session_state:
             "term": "Spring/Summer 2025", 
             "where": "UW-Madison (Summer Semester)",
             "status": "To Do",
-            "ets": "8/10/2025",
+            "ets": "6/16/2025",
             "etd": "8/10/2025",
             "online": True
         }
@@ -153,7 +153,7 @@ if 'bse_grad_courses' not in st.session_state:
             "term": "Spring 2025", 
             "where": "UW-Madison (Spring Semester)",
             "status": "In Progress",
-            "ets": "4/30/2025",
+            "ets": "1/22/2025",
             "etd": "4/30/2025",
             "online": True
         },
@@ -163,7 +163,7 @@ if 'bse_grad_courses' not in st.session_state:
             "term": "Spring 2025", 
             "where": "UW-Madison (Spring Semester)",
             "status": "In Progress",
-            "ets": "4/30/2025",
+            "ets": "1/22/2025",
             "etd": "4/30/2025",
             "online": True
         }
