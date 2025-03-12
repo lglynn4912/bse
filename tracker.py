@@ -498,7 +498,7 @@ for i, course in enumerate(st.session_state.bse_grad_courses):
     cols[6].markdown(course["etd"])
 
 # Science/Engineering Coursework
-st.markdown('<div class="subheader">Science/Engr. Coursework (3 credit left) - Listing Options (two available online for summer semester)</div>', unsafe_allow_html=True)
+st.markdown('<div class="subheader">Science/Engr. Coursework (3 credits left). UW+online options for summer semester:</div>', unsafe_allow_html=True)
 
 # Display and manage science/eng courses
 for i, course in enumerate(st.session_state.science_eng_courses):
