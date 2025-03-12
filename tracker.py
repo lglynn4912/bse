@@ -139,7 +139,7 @@ if not load_data():
                 "where": "ExtensionLearning (UW)",
                 "status": "In Progress",
                 "ets": "--",
-                "etd": "4/28/25"
+                "etd": "4/28/2025"
             },
             {
                 "name": "PHYSICS 103, 104, 201, or 202", 
