@@ -252,12 +252,12 @@ if 'paperwork' not in st.session_state:
             "etd": "April 2025"
         },
         {
-            "title": "Warrant Request Form", 
+            "title": "Sign up for summer courses", 
             "term": "Spring 2025", 
             "where": "--",
             "status": "To Do",
             "ets": "--",
-            "etd": "Three weeks prior to defense"
+            "etd": "Once assigned summer enrollment date"
         },
         {
             "title": "Submit pre-reqs to BSE once complete", 
@@ -268,12 +268,12 @@ if 'paperwork' not in st.session_state:
             "etd": "After all pre-reqs are completed"
         },
         {
-            "title": "Sign up for summer courses", 
+            "title": "Warrant Request Form", 
             "term": "Spring 2025", 
             "where": "--",
             "status": "To Do",
             "ets": "--",
-            "etd": "Once assigned summer enrollment date"
+            "etd": "Three weeks prior to defense"
         }
     ]
 
