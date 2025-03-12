@@ -1,5 +1,4 @@
 import streamlit as st
-import pandas as pd
 import datetime
 
 # Page config
@@ -9,55 +8,6 @@ st.set_page_config(
     layout="wide"
 )
 
-# Add custom CSS
-st.markdown("""
-<style>
-    .header {
-        font-size: 24px;
-        font-weight: bold;
-        padding: 10px;
-        background-color: #e63946;
-        color: white;
-        border-radius: 5px;
-        margin-bottom: 10px;
-    }
-    .subheader {
-        font-size: 18px;
-        font-weight: bold;
-        padding: 8px;
-        background-color: #f1c40f;
-        border-radius: 5px;
-        margin-bottom: 10px;
-    }
-    .section-header {
-        font-size: 16px;
-        font-weight: bold;
-        padding: 6px;
-        background-color: #90ee90;
-        border-radius: 5px;
-        margin-bottom: 10px;
-    }
-    .todo {
-        background-color: #ffcccb;
-    }
-    .in-progress {
-        background-color: #ffffcc;
-    }
-    .completed {
-        background-color: #ccffcc;
-    }
-    .presentations {
-        background-color: #4682b4;
-        color: white;
-        font-weight: bold;
-        padding: 10px;
-        border-radius: 5px;
-        margin-bottom: 10px;
-    }
-</style>
-""", unsafe_allow_html=True)
-
-# Title
 st.title("BSE Course Progress Tracker")
 
 # Status legend
@@ -70,252 +20,134 @@ with col2:
 with col3:
     st.markdown('<div style="background-color: #ccffcc; padding: 10px; border-radius: 5px;">Completed</div>', unsafe_allow_html=True)
 
-# Initialize session state for course status if it doesn't exist
-if 'course_status' not in st.session_state:
-    st.session_state.course_status = {
-        'MATH221': 'To Do',
-        'PHYSICS': 'To Do',
-        'MATH222': 'To Do',
-        'MATH240': 'To Do',
-        'BSE900': 'Completed',
-        'BSE901': 'To Do',
-        'BSE990': 'To Do',
-        'BSE367': 'To Do',
-        'ME536': 'To Do',
-        'BSE530': 'To Do',
-        'ME_CS532': 'To Do',
-    }
-
-# Initialize session state for presentations if it doesn't exist
-if 'presentations' not in st.session_state:
-    st.session_state.presentations = [
-        {
-            'title': 'Research Proposal',
-            'date': datetime.date(2025, 2, 15),
-            'type': 'Committee Meeting',
-            'status': 'In Progress'
-        },
-        {
-            'title': 'Progress Update',
-            'date': datetime.date(2025, 4, 5),
-            'type': 'Department Seminar',
-            'status': 'To Do'
-        },
-        {
-            'title': 'Conference Abstract',
-            'date': datetime.date(2025, 5, 20),
-            'type': 'External Submission',
-            'status': 'To Do'
-        }
-    ]
+# Simple course list without pandas
+courses = [
+    {"name": "MATH221/Transferology Equivalent", "credits": 5, "term": "Fall 2024", "status": "To Do"},
+    {"name": "PHYSICS 103, 104, 201, or 202", "credits": 4, "term": "Fall 2024", "status": "To Do"},
+    {"name": "MATH222/Transferology Equivalent", "credits": 4, "term": "Fall/Winter 2024-2025", "status": "To Do"},
+    {"name": "MATH240/Transferology Equivalent", "credits": 3, "term": "Spring 2025", "status": "To Do"},
+    {"name": "BSE 900", "credits": 1, "term": "Waived", "status": "Completed"},
+    {"name": "BSE 901", "credits": 1, "term": "Spring 2025", "status": "To Do"},
+    {"name": "BSE 990", "credits": 10, "term": "Spring 2025", "status": "To Do"},
+    {"name": "BSE 367(Renewable Energy Systems)", "credits": 3, "term": "Spring 2025", "status": "To Do"},
+    {"name": "M E 536 (DATA DRIVEN ENGINEERING DESIGN)", "credits": 3, "term": "Spring 2025", "status": "To Do"},
+    {"name": "BSE 530 (Intro Data Science for Agric. And Life)", "credits": 3, "term": "Spring 2025", "status": "To Do"},
+    {"name": "M E / CS 532 (MATRIX METHODS IN MACHINE LEARNING)", "credits": 3, "term": "Spring 2025", "status": "To Do"}
+]
 
 # Pre-BSE Courses Section
-st.markdown('<div class="header">Pre-BSE Courses to Fulfill</div>', unsafe_allow_html=True)
+st.markdown("## Pre-BSE Courses to Fulfill")
 
 # Complete before BSE Admission
-st.markdown('<div class="subheader">Complete (with min 3.0 GPA) before BSE Admission Considered</div>', unsafe_allow_html=True)
+st.markdown("### Complete (with min 3.0 GPA) before BSE Admission Considered")
 
-# MATH221
-col1, col2, col3 = st.columns([4, 1, 2])
-with col1:
-    st.markdown("MATH221/Transferology Equivalent")
-with col2:
-    st.markdown("5 credits")
-with col3:
-    status = st.selectbox(
-        "Status",
-        ["To Do", "In Progress", "Completed"],
-        index=["To Do", "In Progress", "Completed"].index(st.session_state.course_status['MATH221']),
-        key="MATH221_status"
-    )
-    st.session_state.course_status['MATH221'] = status
-
-# PHYSICS
-col1, col2, col3 = st.columns([4, 1, 2])
-with col1:
-    st.markdown("PHYSICS 103, 104, 201, or 202/Transferology Equivalent")
-with col2:
-    st.markdown("4 credits")
-with col3:
-    status = st.selectbox(
-        "Status",
-        ["To Do", "In Progress", "Completed"],
-        index=["To Do", "In Progress", "Completed"].index(st.session_state.course_status['PHYSICS']),
-        key="PHYSICS_status"
-    )
-    st.session_state.course_status['PHYSICS'] = status
+for i, course in enumerate(courses[:2]):
+    col1, col2, col3, col4 = st.columns([3, 1, 2, 1])
+    with col1:
+        st.markdown(course["name"])
+    with col2:
+        st.markdown(f"{course['credits']} credits")
+    with col3:
+        st.markdown(course["term"])
+    with col4:
+        new_status = st.selectbox(
+            "Status",
+            ["To Do", "In Progress", "Completed"],
+            index=["To Do", "In Progress", "Completed"].index(course["status"]),
+            key=f"course_{i}_status"
+        )
+        courses[i]["status"] = new_status
 
 # Additional Courses Section
-st.markdown('<div class="section-header">Additional Courses to Complete</div>', unsafe_allow_html=True)
+st.markdown("### Additional Courses to Complete")
 
-# MATH222
-col1, col2, col3, col4 = st.columns([3, 1, 2, 1])
-with col1:
-    st.markdown("MATH222/Transferology Equivalent")
-with col2:
-    st.markdown("4 credits")
-with col3:
-    st.markdown("Fall/Winter 2024-2025")
-with col4:
-    status = st.selectbox(
-        "Status",
-        ["To Do", "In Progress", "Completed"],
-        index=["To Do", "In Progress", "Completed"].index(st.session_state.course_status['MATH222']),
-        key="MATH222_status"
-    )
-    st.session_state.course_status['MATH222'] = status
-
-# MATH240
-col1, col2, col3, col4 = st.columns([3, 1, 2, 1])
-with col1:
-    st.markdown("MATH240/Transferology Equivalent")
-with col2:
-    st.markdown("3 credits")
-with col3:
-    st.markdown("Spring 2025")
-with col4:
-    status = st.selectbox(
-        "Status",
-        ["To Do", "In Progress", "Completed"],
-        index=["To Do", "In Progress", "Completed"].index(st.session_state.course_status['MATH240']),
-        key="MATH240_status"
-    )
-    st.session_state.course_status['MATH240'] = status
+for i, course in enumerate(courses[2:4], 2):
+    col1, col2, col3, col4 = st.columns([3, 1, 2, 1])
+    with col1:
+        st.markdown(course["name"])
+    with col2:
+        st.markdown(f"{course['credits']} credits")
+    with col3:
+        st.markdown(course["term"])
+    with col4:
+        new_status = st.selectbox(
+            "Status",
+            ["To Do", "In Progress", "Completed"],
+            index=["To Do", "In Progress", "Completed"].index(course["status"]),
+            key=f"course_{i}_status"
+        )
+        courses[i]["status"] = new_status
 
 # BSE Grad Course Plan
-st.markdown('<div class="header">BSE Grad Course Plan</div>', unsafe_allow_html=True)
+st.markdown("## BSE Grad Course Plan")
 
 # Research/Seminars
-st.markdown('<div class="subheader">Research/Seminars</div>', unsafe_allow_html=True)
+st.markdown("### Research/Seminars")
 
-# BSE900
-col1, col2, col3, col4 = st.columns([3, 1, 2, 1])
-with col1:
-    st.markdown("BSE 900")
-with col2:
-    st.markdown("1 credit")
-with col3:
-    st.markdown("Waived")
-with col4:
-    status = st.selectbox(
-        "Status",
-        ["To Do", "In Progress", "Completed"],
-        index=["To Do", "In Progress", "Completed"].index(st.session_state.course_status['BSE900']),
-        key="BSE900_status"
-    )
-    st.session_state.course_status['BSE900'] = status
-
-# BSE901
-col1, col2, col3, col4 = st.columns([3, 1, 2, 1])
-with col1:
-    st.markdown("BSE 901")
-with col2:
-    st.markdown("1 credit")
-with col3:
-    st.markdown("Spring 2025")
-with col4:
-    status = st.selectbox(
-        "Status",
-        ["To Do", "In Progress", "Completed"],
-        index=["To Do", "In Progress", "Completed"].index(st.session_state.course_status['BSE901']),
-        key="BSE901_status"
-    )
-    st.session_state.course_status['BSE901'] = status
-
-# BSE990
-col1, col2, col3, col4 = st.columns([3, 1, 2, 1])
-with col1:
-    st.markdown("BSE 990")
-with col2:
-    st.markdown("10 credits")
-with col3:
-    st.markdown("Spring 2025")
-with col4:
-    status = st.selectbox(
-        "Status",
-        ["To Do", "In Progress", "Completed"],
-        index=["To Do", "In Progress", "Completed"].index(st.session_state.course_status['BSE990']),
-        key="BSE990_status"
-    )
-    st.session_state.course_status['BSE990'] = status
+for i, course in enumerate(courses[4:7], 4):
+    col1, col2, col3, col4 = st.columns([3, 1, 2, 1])
+    with col1:
+        st.markdown(course["name"])
+    with col2:
+        st.markdown(f"{course['credits']} credits")
+    with col3:
+        st.markdown(course["term"])
+    with col4:
+        new_status = st.selectbox(
+            "Status",
+            ["To Do", "In Progress", "Completed"],
+            index=["To Do", "In Progress", "Completed"].index(course["status"]),
+            key=f"course_{i}_status"
+        )
+        courses[i]["status"] = new_status
 
 # Science/Engineering Coursework
-st.markdown('<div class="section-header">Science/Engr. Coursework (3 credit left) - Listing Options</div>', unsafe_allow_html=True)
+st.markdown("### Science/Engr. Coursework (3 credit left) - Listing Options")
 
-# BSE367
-col1, col2, col3, col4 = st.columns([3, 1, 2, 1])
-with col1:
-    st.markdown("BSE 367(Renewable Energy Systems)/Transferology Equivalent")
-with col2:
-    st.markdown("3 credits")
-with col3:
-    st.markdown("Spring 2025")
-with col4:
-    status = st.selectbox(
-        "Status",
-        ["To Do", "In Progress", "Completed"],
-        index=["To Do", "In Progress", "Completed"].index(st.session_state.course_status['BSE367']),
-        key="BSE367_status"
-    )
-    st.session_state.course_status['BSE367'] = status
-
-# ME536
-col1, col2, col3, col4 = st.columns([3, 1, 2, 1])
-with col1:
-    st.markdown("M E 536 (DATA DRIVEN ENGINEERING DESIGN)/Transferology Equivalent")
-with col2:
-    st.markdown("3 credits")
-with col3:
-    st.markdown("Spring 2025")
-with col4:
-    status = st.selectbox(
-        "Status",
-        ["To Do", "In Progress", "Completed"],
-        index=["To Do", "In Progress", "Completed"].index(st.session_state.course_status['ME536']),
-        key="ME536_status"
-    )
-    st.session_state.course_status['ME536'] = status
-
-# BSE530
-col1, col2, col3, col4 = st.columns([3, 1, 2, 1])
-with col1:
-    st.markdown("BSE 530 (Intro Data Science for Agric. And Life)/Transferology Equivalent")
-with col2:
-    st.markdown("3 credits")
-with col3:
-    st.markdown("Spring 2025")
-with col4:
-    status = st.selectbox(
-        "Status",
-        ["To Do", "In Progress", "Completed"],
-        index=["To Do", "In Progress", "Completed"].index(st.session_state.course_status['BSE530']),
-        key="BSE530_status"
-    )
-    st.session_state.course_status['BSE530'] = status
-
-# ME/CS532
-col1, col2, col3, col4 = st.columns([3, 1, 2, 1])
-with col1:
-    st.markdown("M E / CS 532 (MATRIX METHODS IN MACHINE LEARNING)/Transferology Equivalent")
-with col2:
-    st.markdown("3 credits")
-with col3:
-    st.markdown("Spring 2025")
-with col4:
-    status = st.selectbox(
-        "Status",
-        ["To Do", "In Progress", "Completed"],
-        index=["To Do", "In Progress", "Completed"].index(st.session_state.course_status['ME_CS532']),
-        key="ME_CS532_status"
-    )
-    st.session_state.course_status['ME_CS532'] = status
+for i, course in enumerate(courses[7:], 7):
+    col1, col2, col3, col4 = st.columns([3, 1, 2, 1])
+    with col1:
+        st.markdown(course["name"])
+    with col2:
+        st.markdown(f"{course['credits']} credits")
+    with col3:
+        st.markdown(course["term"])
+    with col4:
+        new_status = st.selectbox(
+            "Status",
+            ["To Do", "In Progress", "Completed"],
+            index=["To Do", "In Progress", "Completed"].index(course["status"]),
+            key=f"course_{i}_status"
+        )
+        courses[i]["status"] = new_status
 
 # Presentations Section
-st.markdown('<div class="presentations">Presentations & Milestones</div>', unsafe_allow_html=True)
+st.markdown("## Presentations & Milestones")
 
-# Display existing presentations in a table
-presentations_df = pd.DataFrame(st.session_state.presentations)
-st.dataframe(presentations_df, use_container_width=True)
+# Simple presentations list
+presentations = [
+    {"title": "Research Proposal", "date": "2025-02-15", "type": "Committee Meeting", "status": "In Progress"},
+    {"title": "Progress Update", "date": "2025-04-05", "type": "Department Seminar", "status": "To Do"},
+    {"title": "Conference Abstract", "date": "2025-05-20", "type": "External Submission", "status": "To Do"}
+]
+
+# Display presentations
+for i, pres in enumerate(presentations):
+    col1, col2, col3, col4 = st.columns([3, 2, 2, 1])
+    with col1:
+        st.markdown(pres["title"])
+    with col2:
+        st.markdown(pres["date"])
+    with col3:
+        st.markdown(pres["type"])
+    with col4:
+        new_status = st.selectbox(
+            "Status",
+            ["To Do", "In Progress", "Completed"],
+            index=["To Do", "In Progress", "Completed"].index(pres["status"]),
+            key=f"pres_{i}_status"
+        )
+        presentations[i]["status"] = new_status
 
 # Add new presentation
 st.markdown("### Add New Presentation or Milestone")
@@ -330,74 +162,31 @@ with st.form("new_presentation_form"):
     
     submit_button = st.form_submit_button("Add Presentation")
     if submit_button and new_title and new_type:
-        st.session_state.presentations.append({
+        presentations.append({
             'title': new_title,
-            'date': new_date,
+            'date': new_date.strftime('%Y-%m-%d'),
             'type': new_type,
             'status': new_status
         })
         st.experimental_rerun()
 
-# Summary Section
-st.markdown('<div class="header">Summary Dashboard</div>', unsafe_allow_html=True)
+# Summary
+todo_count = len([c for c in courses if c["status"] == "To Do"]) + len([p for p in presentations if p["status"] == "To Do"])
+in_progress_count = len([c for c in courses if c["status"] == "In Progress"]) + len([p for p in presentations if p["status"] == "In Progress"])
+completed_count = len([c for c in courses if c["status"] == "Completed"]) + len([p for p in presentations if p["status"] == "Completed"])
 
-# Count status
-status_counts = {
-    'To Do': 0,
-    'In Progress': 0,
-    'Completed': 0
-}
-
-for status in st.session_state.course_status.values():
-    status_counts[status] += 1
-
-# Add presentations to counts
-for pres in st.session_state.presentations:
-    status_counts[pres['status']] += 1
-
-# Display summary
+st.markdown("## Summary Dashboard")
 col1, col2, col3 = st.columns(3)
 with col1:
-    st.metric("To Do", status_counts['To Do'])
+    st.metric("To Do", todo_count)
 with col2:
-    st.metric("In Progress", status_counts['In Progress'])
+    st.metric("In Progress", in_progress_count)
 with col3:
-    st.metric("Completed", status_counts['Completed'])
+    st.metric("Completed", completed_count)
 
 # Progress bar
-total_items = sum(status_counts.values())
-completed_percentage = (status_counts['Completed'] / total_items) * 100 if total_items > 0 else 0
+total_items = len(courses) + len(presentations)
+completed_percentage = (completed_count / total_items) * 100 if total_items > 0 else 0
 st.markdown("### Overall Progress")
 st.progress(completed_percentage / 100)
 st.write(f"{completed_percentage:.1f}% Complete")
-
-# Add download button for CSV export
-def convert_to_csv():
-    # Prepare course data
-    courses_data = []
-    for course, status in st.session_state.course_status.items():
-        courses_data.append({
-            'Item': course,
-            'Type': 'Course',
-            'Status': status,
-            'Date': ''
-        })
-    
-    # Add presentation data
-    for pres in st.session_state.presentations:
-        courses_data.append({
-            'Item': pres['title'],
-            'Type': pres['type'],
-            'Status': pres['status'],
-            'Date': pres['date'].strftime('%Y-%m-%d')
-        })
-    
-    return pd.DataFrame(courses_data).to_csv(index=False)
-
-csv = convert_to_csv()
-st.download_button(
-    label="Download as CSV",
-    data=csv,
-    file_name="bse_course_tracker.csv",
-    mime="text/csv",
-)
