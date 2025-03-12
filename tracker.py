@@ -462,24 +462,23 @@ for i, course in enumerate(st.session_state.science_eng_courses):
 # Presentations Section
 st.markdown('<div class="header">Presentations</div>', unsafe_allow_html=True)
 
-# Create column headers for presentations
-cols = st.columns([3, 1.5, 1.5, 1.5, 1.5, 1, 1])
+# Create column headers for presentations - UPDATED to use single "Date" column
+cols = st.columns([4.5, 2, 2, 2, 1.5])
 cols[0].markdown("**Title**")
-cols[2].markdown("**Term**")
-cols[3].markdown("**Where**")
-cols[4].markdown("**Status**")
-cols[5].markdown("**Start Date**")
-cols[6].markdown("**End Date**")
+cols[1].markdown("**Term**")
+cols[2].markdown("**Where**")
+cols[3].markdown("**Status**")
+cols[4].markdown("**Date**")
 
 # Display presentations
 for i, pres in enumerate(st.session_state.presentations):
-    cols = st.columns([3, 1.5, 1.5, 1.5, 1.5, 1, 1])
+    cols = st.columns([4.5, 2, 2, 2, 1.5])
     cols[0].markdown(pres["title"])
-    cols[2].markdown(pres["term"])
-    cols[3].markdown(pres["where"])
+    cols[1].markdown(pres["term"])
+    cols[2].markdown(pres["where"])
     
-    # Status dropdown with improved styling - using label_visibility="collapsed"
-    new_status = cols[4].selectbox(
+    # Status dropdown with improved styling
+    new_status = cols[3].selectbox(
         "",
         status_options,
         index=status_options.index(pres["status"]) if pres["status"] in status_options else 0,
@@ -489,30 +488,29 @@ for i, pres in enumerate(st.session_state.presentations):
     if new_status != pres["status"]:
         st.session_state.presentations[i]["status"] = new_status
     
-    cols[5].markdown(pres["ets"])
-    cols[6].markdown(pres["etd"])
+    # Show only end date/due date
+    cols[4].markdown(pres["etd"])
 
 # Committee Meetings Section
 st.markdown('<div class="header">Committee Meetings</div>', unsafe_allow_html=True)
 
-# Create column headers for committee meetings
-cols = st.columns([3, 1.5, 1.5, 1.5, 1.5, 1, 1])
+# Create column headers for committee meetings - UPDATED to use single "Date" column
+cols = st.columns([4.5, 2, 2, 2, 1.5])
 cols[0].markdown("**Title**")
-cols[2].markdown("**Term**")
-cols[3].markdown("**Where**")
-cols[4].markdown("**Status**")
-cols[5].markdown("**Start Date**")
-cols[6].markdown("**End Date**")
+cols[1].markdown("**Term**")
+cols[2].markdown("**Where**")
+cols[3].markdown("**Status**")
+cols[4].markdown("**Date**")
 
 # Display committee meetings
 for i, meeting in enumerate(st.session_state.committee_meetings):
-    cols = st.columns([3, 1.5, 1.5, 1.5, 1.5, 1, 1])
+    cols = st.columns([4.5, 2, 2, 2, 1.5])
     cols[0].markdown(meeting["title"])
-    cols[2].markdown(meeting["term"])
-    cols[3].markdown(meeting["where"])
+    cols[1].markdown(meeting["term"])
+    cols[2].markdown(meeting["where"])
     
-    # Status dropdown with improved styling - using label_visibility="collapsed"
-    new_status = cols[4].selectbox(
+    # Status dropdown with improved styling
+    new_status = cols[3].selectbox(
         "",
         status_options,
         index=status_options.index(meeting["status"]) if meeting["status"] in status_options else 0,
@@ -522,8 +520,8 @@ for i, meeting in enumerate(st.session_state.committee_meetings):
     if new_status != meeting["status"]:
         st.session_state.committee_meetings[i]["status"] = new_status
     
-    cols[5].markdown(meeting["ets"])
-    cols[6].markdown(meeting["etd"])
+    # Show only end date/due date
+    cols[4].markdown(meeting["etd"])
 
 # Paperwork Section
 st.markdown('<div class="header">Paperwork</div>', unsafe_allow_html=True)
