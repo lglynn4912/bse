@@ -422,7 +422,6 @@ st.markdown('<div class="header">Presentations</div>', unsafe_allow_html=True)
 # Create column headers for presentations
 cols = st.columns([3, 1.5, 1.5, 1.5, 1.5, 1, 1])
 cols[0].markdown("**Title**")
-cols[1].markdown("**Location**")
 cols[2].markdown("**Term**")
 cols[3].markdown("**Where**")
 cols[4].markdown("**Status**")
@@ -455,7 +454,6 @@ st.markdown('<div class="header">Committee Meetings</div>', unsafe_allow_html=Tr
 # Create column headers for committee meetings
 cols = st.columns([3, 1.5, 1.5, 1.5, 1.5, 1, 1])
 cols[0].markdown("**Title**")
-cols[1].markdown("**Location**")
 cols[2].markdown("**Term**")
 cols[3].markdown("**Where**")
 cols[4].markdown("**Status**")
@@ -488,7 +486,6 @@ st.markdown('<div class="header">Paperwork</div>', unsafe_allow_html=True)
 # Create column headers for paperwork
 cols = st.columns([3, 1.5, 1.5, 1.5, 1.5, 1, 1])
 cols[0].markdown("**Title**")
-cols[1].markdown("**Location**")
 cols[2].markdown("**Term**")
 cols[3].markdown("**Where**")
 cols[4].markdown("**Status**")
@@ -499,7 +496,6 @@ cols[6].markdown("**Due Date**")
 for i, paper in enumerate(st.session_state.paperwork):
     cols = st.columns([3, 1.5, 1.5, 1.5, 1.5, 1, 1])
     cols[0].markdown(paper["title"])
-    cols[1].markdown(paper["location"])
     cols[2].markdown(paper["term"])
     cols[3].markdown(paper["where"])
     
@@ -542,7 +538,6 @@ with st.form("new_item_form"):
             ["Course", "Presentation", "Committee Meeting", "Paperwork"]
         )
         item_name = st.text_input("Title/Name")
-        location = st.text_input("Location (In Person/Online)")
         term = st.text_input("Term (e.g., Spring 2025)")
     
     with col2:
