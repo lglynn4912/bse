@@ -244,7 +244,7 @@ if 'committee_meetings' not in st.session_state:
 if 'paperwork' not in st.session_state:
     st.session_state.paperwork = [
         {
-            "title": "Submit Signed Committee Form", 
+            "title": "Submit signed Committee Form", 
             "term": "Spring 2025", 
             "where": "--",
             "status": "To Do",
