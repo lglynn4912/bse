@@ -51,15 +51,6 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-
-# Progress bar
-total_items = len([item for item in all_items if item.get("status") != ""])
-completed_percentage = (complete_count / total_items) * 100 if total_items > 0 else 0
-st.markdown("### Overall Progress")
-st.progress(completed_percentage / 100)
-st.write(f"{completed_percentage:.1f}% Complete")
-
-
 st.title("BSE M.S. Progress Tracker for Lauren Glynn")
 
 # Initialize session state for courses if not exists
@@ -99,7 +90,7 @@ if 'pre_bse_courses' not in st.session_state:
             "term": "Spring/Summer 2025", 
             "where": "UW-Madison (Summer Semester)",
             "status": "To Do",
-            "ets": "6/16/2025",
+            "ets": "8/10/2025",
             "etd": "8/10/2025",
             "online": True
         }
@@ -112,9 +103,9 @@ if 'bse_grad_courses' not in st.session_state:
             "credits": 1, 
             "term": "Waived", 
             "where": "",
-            "status": "Complete",
-            "ets": " -- ",
-            "etd": " -- "
+            "status": "",
+            "ets": "",
+            "etd": ""
         },
         {
             "name": "BSE 901", 
@@ -241,6 +232,28 @@ def display_status(status):
     else:
         return status
 
+# Count status across all categories for progress bar at top
+all_items = (
+    st.session_state.pre_bse_courses + 
+    st.session_state.bse_grad_courses + 
+    st.session_state.science_eng_courses + 
+    st.session_state.presentations + 
+    st.session_state.committee_meetings + 
+    st.session_state.paperwork
+)
+
+todo_count = len([item for item in all_items if item.get("status") == "To Do"])
+in_progress_count = len([item for item in all_items if item.get("status") == "In Progress"])
+complete_count = len([item for item in all_items if item.get("status") == "Complete"])
+preparing_count = len([item for item in all_items if item.get("status") == "Preparing"])
+
+# Progress bar at the top
+total_items = len([item for item in all_items if item.get("status") != ""])
+completed_percentage = (complete_count / total_items) * 100 if total_items > 0 else 0
+st.markdown("### Overall Progress")
+st.progress(completed_percentage / 100)
+st.write(f"{completed_percentage:.1f}% Complete")
+
 # Status options
 status_options = ["To Do", "In Progress", "Complete", "Preparing", ""]
 
@@ -355,7 +368,7 @@ for i, course in enumerate(st.session_state.bse_grad_courses):
     cols[6].markdown(course["etd"])
 
 # Science/Engineering Coursework
-st.markdown('<div class="subheader">Science/Engr. Coursework (3 credit left) - Following two options available online for summer semester </div>', unsafe_allow_html=True)
+st.markdown('<div class="subheader">Science/Engr. Coursework (3 credit left) - Listing Options (two available online for summer semester)</div>', unsafe_allow_html=True)
 
 # Display and manage science/eng courses
 for i, course in enumerate(st.session_state.science_eng_courses):
@@ -486,6 +499,20 @@ for i, paper in enumerate(st.session_state.paperwork):
     cols[5].markdown(paper["ets"])
     cols[6].markdown(paper["etd"])
 
+# Summary dashboard section - Now without the progress bar
+st.markdown("## Summary Dashboard")
+
+# Display summary metrics
+col1, col2, col3, col4 = st.columns(4)
+with col1:
+    st.metric("To Do", todo_count)
+with col2:
+    st.metric("In Progress", in_progress_count)
+with col3:
+    st.metric("Complete", complete_count)
+with col4:
+    st.metric("Preparing", preparing_count)
+
 # Add new item section
 st.markdown("## Add New Item")
 with st.form("new_item_form"):
@@ -582,35 +609,6 @@ with st.form("new_item_form"):
             })
         
         st.rerun()
-
-# Summary section
-st.markdown("## Summary Dashboard")
-
-# Count status across all categories
-all_items = (
-    st.session_state.pre_bse_courses + 
-    st.session_state.bse_grad_courses + 
-    st.session_state.science_eng_courses + 
-    st.session_state.presentations + 
-    st.session_state.committee_meetings + 
-    st.session_state.paperwork
-)
-
-todo_count = len([item for item in all_items if item.get("status") == "To Do"])
-in_progress_count = len([item for item in all_items if item.get("status") == "In Progress"])
-complete_count = len([item for item in all_items if item.get("status") == "Complete"])
-preparing_count = len([item for item in all_items if item.get("status") == "Preparing"])
-
-# Display summary metrics
-col1, col2, col3, col4 = st.columns(4)
-with col1:
-    st.metric("To Do", todo_count)
-with col2:
-    st.metric("In Progress", in_progress_count)
-with col3:
-    st.metric("Complete", complete_count)
-with col4:
-    st.metric("Preparing", preparing_count)
 
 # Export options
 st.markdown("## Export Options")
