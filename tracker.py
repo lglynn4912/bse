@@ -90,7 +90,7 @@ if 'pre_bse_courses' not in st.session_state:
             "term": "Spring/Summer 2025", 
             "where": "UW-Madison (Summer Semester)",
             "status": "To Do",
-            "ets": "8/10/2025",
+            "ets": "6/16/2025",
             "etd": "8/10/2025",
             "online": True
         }
@@ -102,7 +102,7 @@ if 'bse_grad_courses' not in st.session_state:
             "name": "BSE 900", 
             "credits": 1, 
             "term": "Waived", 
-            "where": "",
+            "where": " -- ",
             "status": "",
             "ets": "",
             "etd": ""
@@ -181,7 +181,7 @@ if 'committee_meetings' not in st.session_state:
             "title": "1st Committee Meeting", 
             "location": "In Person", 
             "term": "Fall 2025", 
-            "where": "",
+            "where": " UW-Madison",
             "status": "Complete",
             "ets": "--",
             "etd": "12/9/25"
@@ -190,10 +190,19 @@ if 'committee_meetings' not in st.session_state:
             "title": "2nd Committee Meeting", 
             "location": "In Person", 
             "term": "Spring 2025", 
-            "where": "",
+            "where": " UW-Madison",
             "status": "To Do",
             "ets": "--",
             "etd": "April 2025"
+        },
+        {
+            "title": "Circulate thesis outline (papers 1, 2)", 
+            "location": "Email", 
+            "term": "Spring 2025", 
+            "where": " -- ",
+            "status": "To Do",
+            "ets": "--",
+            "etd": "Once submitted for pre-print"
         }
     ]
 
@@ -211,11 +220,29 @@ if 'paperwork' not in st.session_state:
         {
             "title": "Warrant Request Form", 
             "location": "", 
-            "term": "Spring 2025", 
-            "where": "",
+            "term": "Summer 2025", 
+            "where": " -- ",
             "status": "To Do",
             "ets": "--",
             "etd": "Three weeks prior to defense"
+        },
+        {
+            "title": "Submit pre-reqs to BSE once complete", 
+            "location": "--", 
+            "term": "Summer 2025", 
+            "where": "-- ",
+            "status": "To Do",
+            "ets": "--",
+            "etd": "After all pre-reqs are completed"
+        },
+        {
+            "title": "Sign up for summer courses", 
+            "location": "--", 
+            "term": "Spring 2025", 
+            "where": "UW-Madison",
+            "status": "To Do",
+            "ets": "--",
+            "etd": "Once assigned summer enrollment date"
         }
     ]
 
