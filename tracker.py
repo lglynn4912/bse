@@ -389,7 +389,12 @@ st.markdown('<div class="subheader">Complete (with min 3.0 GPA) prior to BSE Adm
 # Display and manage pre-BSE courses
 for i, course in enumerate(st.session_state.pre_bse_courses[:2]):
     cols = st.columns([3, 1, 1.5, 2, 1.5, 1, 1])
-    cols[0].markdown(course["name"])
+    
+    # Add "Online" tag if applicable
+    if course.get("online"):
+        cols[0].markdown(f"{course['name']} (Online)")
+    else:
+        cols[0].markdown(course["name"])
     cols[1].markdown(str(course["credits"]))
     cols[2].markdown(course["term"])
     cols[3].markdown(course["where"])
