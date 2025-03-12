@@ -844,8 +844,8 @@ if st.button(f"Export as {export_format}"):
             file_name="bse_course_tracker.json",
             mime="application/json"
         ).get("status", ""),
-                course.get("ets", ""),
-                course.get("etd", "")
+            course.get("ets", ""),
+            course.get("etd", "")
             ])
         
         # Write BSE grad courses
