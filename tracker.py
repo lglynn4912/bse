@@ -650,8 +650,8 @@ with st.form("new_item_form"):
                 "term": term,
                 "where": where,
                 "status": status,
-                "ets": ets,
-                "etd": etd
+                "ets": 
+                "etd": Date
             })
         elif item_type == "Paperwork":
             st.session_state.paperwork.append({
