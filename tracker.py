@@ -433,7 +433,6 @@ cols[6].markdown("**End Date**")
 for i, pres in enumerate(st.session_state.presentations):
     cols = st.columns([3, 1.5, 1.5, 1.5, 1.5, 1, 1])
     cols[0].markdown(pres["title"])
-    cols[1].markdown(pres["location"])
     cols[2].markdown(pres["term"])
     cols[3].markdown(pres["where"])
     
