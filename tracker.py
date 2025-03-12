@@ -51,48 +51,48 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.title("BSE Course Progress Tracker")
+st.title("BSE M.S. Progress Tracker for Lauren Glynn")
 
 # Initialize session state for courses if not exists
 if 'pre_bse_courses' not in st.session_state:
     st.session_state.pre_bse_courses = [
         {
-            "name": "MATH221/Transferology Equivalent", 
+            "name": "MATH221", 
             "credits": 5, 
             "term": "Winter/Spring 2024", 
             "where": "ExtensionLearning (UW)",
             "status": "In Progress",
-            "ets": "4/28/25",
+            "ets": "--",
             "etd": "4/28/25"
         },
         {
-            "name": "PHYSICS 103, 104, 201, or 202/Transferology Equivalent", 
+            "name": "PHYSICS 103, 104, 201, or 202", 
             "credits": 4, 
             "term": "Fall 2024", 
             "where": "MATC",
             "status": "Complete",
-            "ets": "12/15/2024",
+            "ets": "8/25/2024",
             "etd": "12/15/2024"
         },
         {
-            "name": "MATH222/Transferology Equivalent", 
+            "name": "MATH222", 
             "credits": 4, 
             "term": "Winter/Spring 2025", 
             "where": "ExtensionLearning (UW)",
             "status": "In Progress",
-            "ets": "6/27/2025",
+            "ets": "--",
             "etd": "6/27/2025",
-            "remote": True
+            "online": True
         },
         {
-            "name": "MATH240/Transferology Equivalent", 
+            "name": "MATH240", 
             "credits": 3, 
             "term": "Spring/Summer 2025", 
             "where": "UW-Madison (Summer Semester)",
             "status": "To Do",
             "ets": "8/10/2025",
             "etd": "8/10/2025",
-            "remote": True
+            "online": True
         }
     ]
 
@@ -115,7 +115,7 @@ if 'bse_grad_courses' not in st.session_state:
             "status": "In Progress",
             "ets": "4/30/2025",
             "etd": "4/30/2025",
-            "remote": True
+            "online": True
         },
         {
             "name": "BSE 990", 
@@ -125,14 +125,14 @@ if 'bse_grad_courses' not in st.session_state:
             "status": "In Progress",
             "ets": "4/30/2025",
             "etd": "4/30/2025",
-            "remote": True
+            "online": True
         }
     ]
 
 if 'science_eng_courses' not in st.session_state:
     st.session_state.science_eng_courses = [
         {
-            "name": "BSE 367(Renewable Energy Systems)/Transferology Equivalent", 
+            "name": "BSE 367 (Renewable Energy Systems)", 
             "credits": 3, 
             "term": "Spring/Summer 2025", 
             "where": "UW-Madison (Summer Semester)",
@@ -142,7 +142,7 @@ if 'science_eng_courses' not in st.session_state:
             "online": True
         },
         {
-            "name": "M E / CS 532 (MATRIX METHODS IN MACHINE LEARNING)/Transferology Equivalent", 
+            "name": "M E / CS 532 (MATRIX METHODS IN MACHINE LEARNING)", 
             "credits": 3, 
             "term": "Spring/Summer 2025", 
             "where": "UW-Madison (Summer Semester)",
@@ -209,13 +209,13 @@ if 'paperwork' not in st.session_state:
             "etd": "April 2025"
         },
         {
-            "title": "Submit Intent Paperwork", 
+            "title": "Warrant Request Form", 
             "location": "", 
             "term": "Spring 2025", 
             "where": "",
             "status": "To Do",
-            "ets": "",
-            "etd": ""
+            "ets": "--",
+            "etd": "Three weeks prior to defense"
         }
     ]
 
@@ -245,8 +245,8 @@ cols[1].markdown("**Credit Count**")
 cols[2].markdown("**Term**")
 cols[3].markdown("**Where**")
 cols[4].markdown("**Status**")
-cols[5].markdown("**ETS**")
-cols[6].markdown("**ETD**")
+cols[5].markdown("**Start Date**")
+cols[6].markdown("**End Date**")
 
 # Complete before BSE Admission
 st.markdown('<div class="subheader">Complete (with min 3.0 GPA) before BSE Admission Considered</div>', unsafe_allow_html=True)
@@ -279,9 +279,9 @@ st.markdown('<div class="subheader">Additional Courses to Complete</div>', unsaf
 for i, course in enumerate(st.session_state.pre_bse_courses[2:], 2):
     cols = st.columns([3, 1, 1.5, 2, 1.5, 1, 1])
     
-    # Add "Remote" tag if applicable
-    if course.get("remote"):
-        cols[0].markdown(f"{course['name']} (Remote)")
+    # Add "Online" tag if applicable
+    if course.get("online"):
+        cols[0].markdown(f"{course['name']} (Online)")
     else:
         cols[0].markdown(course["name"])
     
@@ -312,8 +312,8 @@ cols[1].markdown("**Credit Count**")
 cols[2].markdown("**Term**")
 cols[3].markdown("**Where**")
 cols[4].markdown("**Status**")
-cols[5].markdown("**ETS**")
-cols[6].markdown("**ETD**")
+cols[5].markdown("**Start Date**")
+cols[6].markdown("**End Date**")
 
 # Research/Seminars
 st.markdown('<div class="subheader">Research/Seminars</div>', unsafe_allow_html=True)
@@ -322,9 +322,9 @@ st.markdown('<div class="subheader">Research/Seminars</div>', unsafe_allow_html=
 for i, course in enumerate(st.session_state.bse_grad_courses):
     cols = st.columns([3, 1, 1.5, 2, 1.5, 1, 1])
     
-    # Add "Remote" tag if applicable
-    if course.get("remote"):
-        cols[0].markdown(f"{course['name']} (Remote)")
+    # Add "Online" tag if applicable
+    if course.get("online"):
+        cols[0].markdown(f"{course['name']} (Online)")
     else:
         cols[0].markdown(course["name"])
     
@@ -385,8 +385,8 @@ cols[1].markdown("**Location**")
 cols[2].markdown("**Term**")
 cols[3].markdown("**Where**")
 cols[4].markdown("**Status**")
-cols[5].markdown("**ETS**")
-cols[6].markdown("**ETD**")
+cols[5].markdown("**Start Date**")
+cols[6].markdown("**End Date**")
 
 # Display presentations
 for i, pres in enumerate(st.session_state.presentations):
@@ -419,8 +419,8 @@ cols[1].markdown("**Location**")
 cols[2].markdown("**Term**")
 cols[3].markdown("**Where**")
 cols[4].markdown("**Status**")
-cols[5].markdown("**ETS**")
-cols[6].markdown("**ETD**")
+cols[5].markdown("**Start Date**")
+cols[6].markdown("**End Date**")
 
 # Display committee meetings
 for i, meeting in enumerate(st.session_state.committee_meetings):
@@ -453,8 +453,8 @@ cols[1].markdown("**Location**")
 cols[2].markdown("**Term**")
 cols[3].markdown("**Where**")
 cols[4].markdown("**Status**")
-cols[5].markdown("**ETS**")
-cols[6].markdown("**ETD**")
+cols[5].markdown("**Start Date**")
+cols[6].markdown("**Due Date**")
 
 # Display paperwork
 for i, paper in enumerate(st.session_state.paperwork):
@@ -489,14 +489,14 @@ with st.form("new_item_form"):
             ["Course", "Presentation", "Committee Meeting", "Paperwork"]
         )
         item_name = st.text_input("Title/Name")
-        location = st.text_input("Location (In Person/Remote/Online)")
+        location = st.text_input("Location (In Person/Online)")
         term = st.text_input("Term (e.g., Spring 2025)")
     
     with col2:
         where = st.text_input("Where (Institution)")
         status = st.selectbox("Status", status_options)
-        ets = st.text_input("Estimated Time Start (MM/DD/YY)")
-        etd = st.text_input("Estimated Time Done (MM/DD/YY)")
+        ets = st.text_input("Start Date")
+        etd = st.text_input("End Date/Due Date")
     
     # Add credits field for courses
     if item_type == "Course":
@@ -517,7 +517,6 @@ with st.form("new_item_form"):
                         "status": status,
                         "ets": ets,
                         "etd": etd,
-                        "remote": "REMOTE" in location.upper(),
                         "online": "ONLINE" in location.upper()
                     })
                 else:
@@ -529,7 +528,6 @@ with st.form("new_item_form"):
                         "status": status,
                         "ets": ets,
                         "etd": etd,
-                        "remote": "REMOTE" in location.upper(),
                         "online": "ONLINE" in location.upper()
                     })
             else:
@@ -541,7 +539,6 @@ with st.form("new_item_form"):
                     "status": status,
                     "ets": ets,
                     "etd": etd,
-                    "remote": "REMOTE" in location.upper(),
                     "online": "ONLINE" in location.upper()
                 })
         elif item_type == "Presentation":
@@ -626,7 +623,7 @@ if st.button(f"Export as {export_format}"):
         writer = csv.writer(output)
         
         # Write headers
-        writer.writerow(["Type", "Name", "Credits", "Term", "Where", "Status", "ETS", "ETD"])
+        writer.writerow(["Type", "Name", "Credits", "Term", "Where", "Status", "Start Date", "End Date"])
         
         # Write Pre-BSE courses
         for course in st.session_state.pre_bse_courses:
