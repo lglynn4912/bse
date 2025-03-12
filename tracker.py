@@ -218,7 +218,7 @@ if 'committee_meetings' not in st.session_state:
         {
             "title": "1st Committee Meeting", 
             "term": "Fall 2025", 
-            "where": "--",
+            "where": "UW-Madison",
             "status": "Complete",
             "ets": "--",
             "etd": "12/9/25"
@@ -226,7 +226,7 @@ if 'committee_meetings' not in st.session_state:
         {
             "title": "2nd Committee Meeting",  
             "term": "Spring 2025", 
-            "where": "--",
+            "where": "UW-Madison",
             "status": "To Do",
             "ets": "--",
             "etd": "April 2025"
