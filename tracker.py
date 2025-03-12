@@ -243,7 +243,7 @@ if 'paperwork' not in st.session_state:
         {
             "title": "Submit pre-reqs to BSE once complete", 
             "term": "Summer 2025", 
-            "where": "BSE Department",
+            "where": "--",
             "status": "To Do",
             "ets": "--",
             "etd": "After all pre-reqs are completed"
@@ -251,7 +251,7 @@ if 'paperwork' not in st.session_state:
         {
             "title": "Sign up for summer courses", 
             "term": "Spring 2025", 
-            "where": "UW-Madison",
+            "where": "--",
             "status": "To Do",
             "ets": "--",
             "etd": "Once assigned summer enrollment date"
@@ -335,7 +335,7 @@ cols[5].markdown("**Start Date**")
 cols[6].markdown("**End Date**")
 
 # Complete before BSE Admission
-st.markdown('<div class="subheader">Complete (with min 3.0 GPA) before BSE Admission Considered</div>', unsafe_allow_html=True)
+st.markdown('<div class="subheader">Complete (with min 3.0 GPA) prior to BSE Admission</div>', unsafe_allow_html=True)
 
 # Display and manage pre-BSE courses
 for i, course in enumerate(st.session_state.pre_bse_courses[:2]):
