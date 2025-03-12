@@ -466,7 +466,6 @@ cols[6].markdown("**End Date**")
 for i, meeting in enumerate(st.session_state.committee_meetings):
     cols = st.columns([3, 1.5, 1.5, 1.5, 1.5, 1, 1])
     cols[0].markdown(meeting["title"])
-    cols[1].markdown(meeting["location"])
     cols[2].markdown(meeting["term"])
     cols[3].markdown(meeting["where"])
     
