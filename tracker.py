@@ -232,10 +232,6 @@ def display_status(status):
     else:
         return status
 
-# Function to update course status
-def update_course_status(course_list, index, new_status):
-    course_list[index]["status"] = new_status
-
 # Status options
 status_options = ["To Do", "In Progress", "Complete", "Preparing", ""]
 
@@ -616,45 +612,6 @@ completed_percentage = (complete_count / total_items) * 100 if total_items > 0 e
 st.markdown("### Overall Progress")
 st.progress(completed_percentage / 100)
 st.write(f"{completed_percentage:.1f}% Complete")
-
-# Calculate next important deadlines
-upcoming_deadlines = []
-current_date = datetime.datetime.now()
-
-for item in all_items:
-    if item.get("etd") and item.get("status") != "Complete":
-        try:
-            deadline_date = None
-            # Try different date formats
-            for fmt in ["%m/%d/%Y", "%m/%d/%y", "%B %Y", "%m/%Y"]:
-                try:
-                    deadline_date = datetime.datetime.strptime(item.get("etd"), fmt)
-                    break
-                except ValueError:
-                    continue
-            
-            if deadline_date:
-                item_type = "Course"
-                if "title" in item:
-                    item_type = "Activity"
-                
-                name = item.get("name", item.get("title", "Unknown"))
-                upcoming_deadlines.append((deadline_date, name, item_type, item.get("status")))
-        except ValueError:
-            # Skip items with invalid date formats
-            pass
-
-# Sort deadlines by date
-upcoming_deadlines.sort(key=lambda x: x[0])
-
-# Display upcoming deadlines
-st.markdown("### Upcoming Deadlines")
-if upcoming_deadlines:
-    for deadline in upcoming_deadlines[:5]:  # Show 5 most imminent deadlines
-        date_str = deadline[0].strftime("%B %d, %Y") if deadline[0].day != 1 else deadline[0].strftime("%B %Y")
-        st.markdown(f"**{date_str}**: {deadline[1]} ({deadline[2]}) - {display_status(deadline[3])}", unsafe_allow_html=True)
-else:
-    st.write("No upcoming deadlines found.")
 
 # Export options
 st.markdown("## Export Options")
