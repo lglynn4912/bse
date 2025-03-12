@@ -127,7 +127,7 @@ if 'pre_bse_courses' not in st.session_state:
         {
             "name": "MATH240", 
             "credits": 3, 
-            "term": "Spring/Summer 2025", 
+            "term": "Summer 2025", 
             "where": "UW-Madison (Summer Semester)",
             "status": "To Do",
             "ets": "6/16/2025",
@@ -174,7 +174,7 @@ if 'science_eng_courses' not in st.session_state:
         {
             "name": "BSE 367 (Renewable Energy Systems)", 
             "credits": 3, 
-            "term": "Spring/Summer 2025", 
+            "term": "Summer 2025", 
             "where": "UW-Madison (Summer Semester)",
             "status": "To Do",
             "ets": "6/16/2025",
@@ -184,7 +184,7 @@ if 'science_eng_courses' not in st.session_state:
         {
             "name": "M E / CS 532 (MATRIX METHODS IN MACHINE LEARNING)", 
             "credits": 3, 
-            "term": "Spring/Summer 2025", 
+            "term": "Summer 2025", 
             "where": "UW-Madison (Summer Semester)",
             "status": "To Do",
             "ets": "6/16/2025",
