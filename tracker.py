@@ -526,24 +526,21 @@ for i, meeting in enumerate(st.session_state.committee_meetings):
 # Paperwork Section
 st.markdown('<div class="header">Paperwork</div>', unsafe_allow_html=True)
 
-# Create column headers for paperwork
-cols = st.columns([3, 1.5, 1.5, 1.5, 1.5, 1, 1])
+# Create column headers for paperwork - UPDATED to remove Where and Start Date columns
+cols = st.columns([5, 2, 2, 3])
 cols[0].markdown("**Title**")
-cols[2].markdown("**Term**")
-cols[3].markdown("**Where**")
-cols[4].markdown("**Status**")
-cols[5].markdown("**Start Date**")
-cols[6].markdown("**Due Date**")
+cols[1].markdown("**Term**")
+cols[2].markdown("**Status**")
+cols[3].markdown("**Due Date**")
 
 # Display paperwork
 for i, paper in enumerate(st.session_state.paperwork):
-    cols = st.columns([3, 1.5, 1.5, 1.5, 1.5, 1, 1])
+    cols = st.columns([5, 2, 2, 3])
     cols[0].markdown(paper["title"])
-    cols[2].markdown(paper["term"])
-    cols[3].markdown(paper["where"])
+    cols[1].markdown(paper["term"])
     
-    # Status dropdown with improved styling - using label_visibility="collapsed"
-    new_status = cols[4].selectbox(
+    # Status dropdown with improved styling
+    new_status = cols[2].selectbox(
         "",
         status_options,
         index=status_options.index(paper["status"]) if paper["status"] in status_options else 0,
@@ -553,8 +550,8 @@ for i, paper in enumerate(st.session_state.paperwork):
     if new_status != paper["status"]:
         st.session_state.paperwork[i]["status"] = new_status
     
-    cols[5].markdown(paper["ets"])
-    cols[6].markdown(paper["etd"])
+    # Show only due date
+    cols[3].markdown(paper["etd"])
 
 # Summary dashboard section - Now without the progress bar
 st.markdown("## Summary Dashboard")
