@@ -51,6 +51,15 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+
+# Progress bar
+total_items = len([item for item in all_items if item.get("status") != ""])
+completed_percentage = (complete_count / total_items) * 100 if total_items > 0 else 0
+st.markdown("### Overall Progress")
+st.progress(completed_percentage / 100)
+st.write(f"{completed_percentage:.1f}% Complete")
+
+
 st.title("BSE M.S. Progress Tracker for Lauren Glynn")
 
 # Initialize session state for courses if not exists
@@ -90,7 +99,7 @@ if 'pre_bse_courses' not in st.session_state:
             "term": "Spring/Summer 2025", 
             "where": "UW-Madison (Summer Semester)",
             "status": "To Do",
-            "ets": "8/10/2025",
+            "ets": "6/16/2025",
             "etd": "8/10/2025",
             "online": True
         }
@@ -103,9 +112,9 @@ if 'bse_grad_courses' not in st.session_state:
             "credits": 1, 
             "term": "Waived", 
             "where": "",
-            "status": "",
-            "ets": "",
-            "etd": ""
+            "status": "Complete",
+            "ets": " -- ",
+            "etd": " -- "
         },
         {
             "name": "BSE 901", 
@@ -346,7 +355,7 @@ for i, course in enumerate(st.session_state.bse_grad_courses):
     cols[6].markdown(course["etd"])
 
 # Science/Engineering Coursework
-st.markdown('<div class="subheader">Science/Engr. Coursework (3 credit left) - Listing Options (two available online for summer semester)</div>', unsafe_allow_html=True)
+st.markdown('<div class="subheader">Science/Engr. Coursework (3 credit left) - Following two options available online for summer semester </div>', unsafe_allow_html=True)
 
 # Display and manage science/eng courses
 for i, course in enumerate(st.session_state.science_eng_courses):
@@ -602,13 +611,6 @@ with col3:
     st.metric("Complete", complete_count)
 with col4:
     st.metric("Preparing", preparing_count)
-
-# Progress bar
-total_items = len([item for item in all_items if item.get("status") != ""])
-completed_percentage = (complete_count / total_items) * 100 if total_items > 0 else 0
-st.markdown("### Overall Progress")
-st.progress(completed_percentage / 100)
-st.write(f"{completed_percentage:.1f}% Complete")
 
 # Export options
 st.markdown("## Export Options")
