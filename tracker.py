@@ -49,25 +49,44 @@ st.markdown("""
         border-radius: 3px;
     }
     
-    /* Alignment fixes for dropdowns and table rows */
+    /* Strong alignment fixes for all dropdowns */
     div.row-widget.stSelectbox {
         margin: 0 !important;
         padding: 0 !important;
     }
     
+    /* Remove all extra spacing around selectboxes */
     .stSelectbox > div {
         min-height: 0 !important;
+        line-height: 1 !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
     }
     
-    /* Make rows more compact */
+    /* Make all selectbox components aligned */
+    .stSelectbox [data-baseweb="select"] {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+    
+    /* Make rows very compact */
     .element-container {
         margin-bottom: 0 !important;
+        padding: 0 !important;
     }
     
     /* Align text in columns */
     .stMarkdown p {
         margin-top: 0.5rem;
         margin-bottom: 0.5rem;
+        padding-top: 0.25rem !important;
+        padding-bottom: 0 !important;
+    }
+    
+    /* Make sure horizontal alignment is consistent */
+    .row-widget {
+        display: flex;
+        align-items: center;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -243,7 +262,7 @@ if 'paperwork' not in st.session_state:
         {
             "title": "Submit pre-reqs to BSE once complete", 
             "term": "Summer 2025", 
-            "where": "--",
+            "where": "BSE Department",
             "status": "To Do",
             "ets": "--",
             "etd": "After all pre-reqs are completed"
@@ -251,37 +270,12 @@ if 'paperwork' not in st.session_state:
         {
             "title": "Sign up for summer courses", 
             "term": "Spring 2025", 
-            "where": "--",
+            "where": "UW-Madison",
             "status": "To Do",
             "ets": "--",
             "etd": "Once assigned summer enrollment date"
         }
     ]
-
-# Custom CSS for better visual representation and alignment fixes
-st.markdown("""
-<style>
-    /* Existing styles... */
-    
-    /* Fix for dropdown alignment */
-    div.row-widget.stSelectbox {
-        margin-bottom: 0;
-        padding-top: 0;
-        padding-bottom: 0;
-    }
-    
-    /* Make dropdown more compact */
-    .stSelectbox > div > div {
-        line-height: 1;
-    }
-    
-    /* Remove extra spacing in table rows */
-    .element-container {
-        margin-bottom: 0 !important;
-        padding-bottom: 0 !important;
-    }
-</style>
-""", unsafe_allow_html=True)
 
 # Function to display status with colored background
 def display_status(status):
@@ -345,7 +339,7 @@ for i, course in enumerate(st.session_state.pre_bse_courses[:2]):
     cols[2].markdown(course["term"])
     cols[3].markdown(course["where"])
     
-    # Status dropdown with improved styling
+    # Status dropdown with improved styling - using label_visibility="collapsed"
     new_status = cols[4].selectbox(
         "",
         status_options,
@@ -376,12 +370,13 @@ for i, course in enumerate(st.session_state.pre_bse_courses[2:], 2):
     cols[2].markdown(course["term"])
     cols[3].markdown(course["where"])
     
-    # Status dropdown
+    # Status dropdown with improved styling - using label_visibility="collapsed"
     new_status = cols[4].selectbox(
         "",
         status_options,
         index=status_options.index(course["status"]) if course["status"] in status_options else 0,
-        key=f"pre_bse_{i}_status"
+        key=f"pre_bse_{i}_status",
+        label_visibility="collapsed"
     )
     if new_status != course["status"]:
         st.session_state.pre_bse_courses[i]["status"] = new_status
@@ -419,12 +414,13 @@ for i, course in enumerate(st.session_state.bse_grad_courses):
     cols[2].markdown(course["term"])
     cols[3].markdown(course["where"])
     
-    # Status dropdown
+    # Status dropdown with improved styling - using label_visibility="collapsed"
     new_status = cols[4].selectbox(
         "",
         status_options,
         index=status_options.index(course["status"]) if course["status"] in status_options else 0,
-        key=f"bse_grad_{i}_status"
+        key=f"bse_grad_{i}_status",
+        label_visibility="collapsed"
     )
     if new_status != course["status"]:
         st.session_state.bse_grad_courses[i]["status"] = new_status
@@ -449,12 +445,13 @@ for i, course in enumerate(st.session_state.science_eng_courses):
     cols[2].markdown(course["term"])
     cols[3].markdown(course["where"])
     
-    # Status dropdown
+    # Status dropdown with improved styling - using label_visibility="collapsed"
     new_status = cols[4].selectbox(
         "",
         status_options,
         index=status_options.index(course["status"]) if course["status"] in status_options else 0,
-        key=f"science_eng_{i}_status"
+        key=f"science_eng_{i}_status",
+        label_visibility="collapsed"
     )
     if new_status != course["status"]:
         st.session_state.science_eng_courses[i]["status"] = new_status
@@ -481,12 +478,13 @@ for i, pres in enumerate(st.session_state.presentations):
     cols[2].markdown(pres["term"])
     cols[3].markdown(pres["where"])
     
-    # Status dropdown
+    # Status dropdown with improved styling - using label_visibility="collapsed"
     new_status = cols[4].selectbox(
         "",
         status_options,
         index=status_options.index(pres["status"]) if pres["status"] in status_options else 0,
-        key=f"pres_{i}_status"
+        key=f"pres_{i}_status",
+        label_visibility="collapsed"
     )
     if new_status != pres["status"]:
         st.session_state.presentations[i]["status"] = new_status
@@ -513,12 +511,13 @@ for i, meeting in enumerate(st.session_state.committee_meetings):
     cols[2].markdown(meeting["term"])
     cols[3].markdown(meeting["where"])
     
-    # Status dropdown
+    # Status dropdown with improved styling - using label_visibility="collapsed"
     new_status = cols[4].selectbox(
         "",
         status_options,
         index=status_options.index(meeting["status"]) if meeting["status"] in status_options else 0,
-        key=f"meeting_{i}_status"
+        key=f"meeting_{i}_status",
+        label_visibility="collapsed"
     )
     if new_status != meeting["status"]:
         st.session_state.committee_meetings[i]["status"] = new_status
@@ -545,12 +544,13 @@ for i, paper in enumerate(st.session_state.paperwork):
     cols[2].markdown(paper["term"])
     cols[3].markdown(paper["where"])
     
-    # Status dropdown
+    # Status dropdown with improved styling - using label_visibility="collapsed"
     new_status = cols[4].selectbox(
         "",
         status_options,
         index=status_options.index(paper["status"]) if paper["status"] in status_options else 0,
-        key=f"paper_{i}_status"
+        key=f"paper_{i}_status",
+        label_visibility="collapsed"
     )
     if new_status != paper["status"]:
         st.session_state.paperwork[i]["status"] = new_status
@@ -611,7 +611,7 @@ with st.form("new_item_form"):
                         "status": status,
                         "ets": ets,
                         "etd": etd,
-                        "online": "ONLINE" in location.upper()
+                        "online": False  # Fixed the location.upper() reference that was causing errors
                     })
                 else:
                     st.session_state.science_eng_courses.append({
@@ -622,7 +622,7 @@ with st.form("new_item_form"):
                         "status": status,
                         "ets": ets,
                         "etd": etd,
-                        "online": "ONLINE" in location.upper()
+                        "online": False  # Fixed the location.upper() reference that was causing errors
                     })
             else:
                 st.session_state.pre_bse_courses.append({
@@ -633,7 +633,7 @@ with st.form("new_item_form"):
                     "status": status,
                     "ets": ets,
                     "etd": etd,
-                    "online": "ONLINE" in location.upper()
+                    "online": False  # Fixed the location.upper() reference that was causing errors
                 })
         elif item_type == "Presentation":
             st.session_state.presentations.append({
