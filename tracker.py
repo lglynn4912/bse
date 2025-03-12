@@ -217,7 +217,7 @@ if 'committee_meetings' not in st.session_state:
     st.session_state.committee_meetings = [
         {
             "title": "1st Committee Meeting", 
-            "term": "Fall 2025", 
+            "term": "Fall 2024", 
             "where": "UW-Madison",
             "status": "Complete",
             "ets": "--",
@@ -244,7 +244,7 @@ if 'committee_meetings' not in st.session_state:
 if 'paperwork' not in st.session_state:
     st.session_state.paperwork = [
         {
-            "title": "Submit Committee Paperwork", 
+            "title": "Submit Signed Committee Form", 
             "term": "Spring 2025", 
             "where": "--",
             "status": "To Do",
