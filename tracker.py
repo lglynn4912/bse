@@ -140,6 +140,7 @@ if not load_data():
                 "status": "In Progress",
                 "ets": "--",
                 "etd": "4/28/2025"
+                "online": True
             },
             {
                 "name": "PHYSICS 103, 104, 201, or 202", 
@@ -218,7 +219,7 @@ if not load_data():
                 "online": True
             },
             {
-                "name": "M E / CS 532 (MATRIX METHODS IN MACHINE LEARNING)", 
+                "name": "M E / CS 532 (Matrix Methods in Machine Learning)", 
                 "credits": 3, 
                 "term": "Summer 2025", 
                 "where": "UW-Madison (Summer Semester)",
