@@ -269,7 +269,7 @@ if 'paperwork' not in st.session_state:
         },
         {
             "title": "Warrant Request Form", 
-            "term": "Summer 2025", 
+            "term": "Summer 202", 
             "where": "--",
             "status": "To Do",
             "ets": "--",
