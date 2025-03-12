@@ -8,7 +8,7 @@ st.set_page_config(
     layout="wide"
 )
 
-# Custom CSS for better visual representation
+# Custom CSS for better visual representation and alignment fixes
 st.markdown("""
 <style>
     .header {
@@ -48,6 +48,27 @@ st.markdown("""
         padding: 2px 5px;
         border-radius: 3px;
     }
+    
+    /* Alignment fixes for dropdowns and table rows */
+    div.row-widget.stSelectbox {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    .stSelectbox > div {
+        min-height: 0 !important;
+    }
+    
+    /* Make rows more compact */
+    .element-container {
+        margin-bottom: 0 !important;
+    }
+    
+    /* Align text in columns */
+    .stMarkdown p {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -63,8 +84,7 @@ if 'pre_bse_courses' not in st.session_state:
             "where": "ExtensionLearning (UW)",
             "status": "In Progress",
             "ets": "--",
-            "etd": "4/28/25",
-             "online": True
+            "etd": "4/28/25"
         },
         {
             "name": "PHYSICS 103, 104, 201, or 202", 
@@ -78,7 +98,7 @@ if 'pre_bse_courses' not in st.session_state:
         {
             "name": "MATH222", 
             "credits": 4, 
-            "term": "Spring 2025", 
+            "term": "Winter/Spring 2025", 
             "where": "ExtensionLearning (UW)",
             "status": "In Progress",
             "ets": "--",
@@ -88,10 +108,10 @@ if 'pre_bse_courses' not in st.session_state:
         {
             "name": "MATH240", 
             "credits": 3, 
-            "term": "Summer 2025", 
+            "term": "Spring/Summer 2025", 
             "where": "UW-Madison (Summer Semester)",
             "status": "To Do",
-            "ets": "6/16/2025",
+            "ets": "8/10/2025",
             "etd": "8/10/2025",
             "online": True
         }
@@ -103,8 +123,8 @@ if 'bse_grad_courses' not in st.session_state:
             "name": "BSE 900", 
             "credits": 1, 
             "term": "Waived", 
-            "where": " -- ",
-            "status": "",
+            "where": "",
+            "status": "Complete",
             "ets": "",
             "etd": ""
         },
@@ -114,7 +134,7 @@ if 'bse_grad_courses' not in st.session_state:
             "term": "Spring 2025", 
             "where": "UW-Madison (Spring Semester)",
             "status": "In Progress",
-            "ets": "1/22/2025",
+            "ets": "4/30/2025",
             "etd": "4/30/2025",
             "online": True
         },
@@ -124,7 +144,7 @@ if 'bse_grad_courses' not in st.session_state:
             "term": "Spring 2025", 
             "where": "UW-Madison (Spring Semester)",
             "status": "In Progress",
-            "ets": "1/22/2025",
+            "ets": "4/30/2025",
             "etd": "4/30/2025",
             "online": True
         }
@@ -135,7 +155,7 @@ if 'science_eng_courses' not in st.session_state:
         {
             "name": "BSE 367 (Renewable Energy Systems)", 
             "credits": 3, 
-            "term": "Summer 2025", 
+            "term": "Spring/Summer 2025", 
             "where": "UW-Madison (Summer Semester)",
             "status": "To Do",
             "ets": "6/16/2025",
@@ -145,7 +165,7 @@ if 'science_eng_courses' not in st.session_state:
         {
             "name": "M E / CS 532 (MATRIX METHODS IN MACHINE LEARNING)", 
             "credits": 3, 
-            "term": "Summer 2025", 
+            "term": "Spring/Summer 2025", 
             "where": "UW-Madison (Summer Semester)",
             "status": "To Do",
             "ets": "6/16/2025",
@@ -179,15 +199,15 @@ if 'committee_meetings' not in st.session_state:
         {
             "title": "1st Committee Meeting", 
             "term": "Fall 2025", 
-            "where": " UW-Madison",
+            "where": "",
             "status": "Complete",
             "ets": "--",
             "etd": "12/9/25"
         },
         {
-            "title": "2nd Committee Meeting", 
+            "title": "2nd Committee Meeting",  
             "term": "Spring 2025", 
-            "where": " UW-Madison",
+            "where": "",
             "status": "To Do",
             "ets": "--",
             "etd": "April 2025"
@@ -195,17 +215,17 @@ if 'committee_meetings' not in st.session_state:
         {
             "title": "Circulate thesis outline (papers 1, 2)", 
             "term": "Spring 2025", 
-            "where": " -- ",
+            "where": "",
             "status": "To Do",
             "ets": "--",
-            "etd": "Once submitted for pre-print"
+            "etd": "Once submitted"
         }
     ]
 
 if 'paperwork' not in st.session_state:
     st.session_state.paperwork = [
         {
-            "title": "Submit Committee Form with Signatures", 
+            "title": "Submit Committee Paperwork", 
             "term": "Spring 2025", 
             "where": "--",
             "status": "To Do",
@@ -214,16 +234,16 @@ if 'paperwork' not in st.session_state:
         },
         {
             "title": "Warrant Request Form", 
-            "term": "Summer 2025", 
-            "where": " -- ",
+            "term": "Spring 2025", 
+            "where": "",
             "status": "To Do",
             "ets": "--",
             "etd": "Three weeks prior to defense"
         },
         {
             "title": "Submit pre-reqs to BSE once complete", 
-            "term": "--", 
-            "where": "-- ",
+            "term": "Summer 2025", 
+            "where": "BSE Department",
             "status": "To Do",
             "ets": "--",
             "etd": "After all pre-reqs are completed"
@@ -237,6 +257,31 @@ if 'paperwork' not in st.session_state:
             "etd": "Once assigned summer enrollment date"
         }
     ]
+
+# Custom CSS for better visual representation and alignment fixes
+st.markdown("""
+<style>
+    /* Existing styles... */
+    
+    /* Fix for dropdown alignment */
+    div.row-widget.stSelectbox {
+        margin-bottom: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    
+    /* Make dropdown more compact */
+    .stSelectbox > div > div {
+        line-height: 1;
+    }
+    
+    /* Remove extra spacing in table rows */
+    .element-container {
+        margin-bottom: 0 !important;
+        padding-bottom: 0 !important;
+    }
+</style>
+""", unsafe_allow_html=True)
 
 # Function to display status with colored background
 def display_status(status):
@@ -266,12 +311,12 @@ in_progress_count = len([item for item in all_items if item.get("status") == "In
 complete_count = len([item for item in all_items if item.get("status") == "Complete"])
 preparing_count = len([item for item in all_items if item.get("status") == "Preparing"])
 
-# Progress bar at the top
-total_items = len([item for item in all_items if item.get("status") != ""])
-completed_percentage = (complete_count / total_items) * 100 if total_items > 0 else 0
-st.markdown("### Overall Progress")
-st.progress(completed_percentage / 100)
-st.write(f"{completed_percentage:.1f}% Complete")
+# # Progress bar at the top
+# total_items = len([item for item in all_items if item.get("status") != ""])
+# completed_percentage = (complete_count / total_items) * 100 if total_items > 0 else 0
+# st.markdown("### Overall Progress")
+# st.progress(completed_percentage / 100)
+# st.write(f"{completed_percentage:.1f}% Complete")
 
 # Status options
 status_options = ["To Do", "In Progress", "Complete", "Preparing", ""]
@@ -300,12 +345,13 @@ for i, course in enumerate(st.session_state.pre_bse_courses[:2]):
     cols[2].markdown(course["term"])
     cols[3].markdown(course["where"])
     
-    # Status dropdown
+    # Status dropdown with improved styling
     new_status = cols[4].selectbox(
         "",
         status_options,
         index=status_options.index(course["status"]) if course["status"] in status_options else 0,
-        key=f"pre_bse_{i}_status"
+        key=f"pre_bse_{i}_status",
+        label_visibility="collapsed"
     )
     if new_status != course["status"]:
         st.session_state.pre_bse_courses[i]["status"] = new_status
@@ -592,7 +638,6 @@ with st.form("new_item_form"):
         elif item_type == "Presentation":
             st.session_state.presentations.append({
                 "title": item_name,
-                "location": location,
                 "term": term,
                 "where": where,
                 "status": status,
@@ -602,7 +647,6 @@ with st.form("new_item_form"):
         elif item_type == "Committee Meeting":
             st.session_state.committee_meetings.append({
                 "title": item_name,
-                "location": location,
                 "term": term,
                 "where": where,
                 "status": status,
@@ -612,7 +656,6 @@ with st.form("new_item_form"):
         elif item_type == "Paperwork":
             st.session_state.paperwork.append({
                 "title": item_name,
-                "location": location,
                 "term": term,
                 "where": where,
                 "status": status,
