@@ -257,7 +257,7 @@ if not load_data():
                 "where": "UW-Madison",
                 "status": "Complete",
                 "ets": "--",
-                "etd": "12/9/24"
+                "etd": "12/9/2024"
             },
             {
                 "title": "2nd Committee Meeting",  
