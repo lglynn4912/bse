@@ -294,7 +294,7 @@ if not load_data():
                 "where": "--",
                 "status": "To Do",
                 "ets": "--",
-                "etd": "Once assigned summer enrollment date"
+                "etd": "3/31/2025"
             },
             {
                 "title": "Submit pre-reqs to BSE once complete", 
